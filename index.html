@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1a237e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RT 05 Digital">
+  <link rel="apple-touch-icon" href="https://i.ibb.co.com/jPxLvMfD/logort05.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary: #1a237e;
+      --primary2: #283593;
+      --primary3: #3949ab;
+      --danger: #c62828;
+      --bg: #f0f2f8;
+      --radius: 14px;
+      /* Font size variables - diubah oleh pengaturan */
+      --fs-xs: 2.5vw;
+      --fs-sm: 3.2vw;
+      --fs-nm: 3.8vw;
+      --fs-lg: 4.5vw;
+      --fs-xl: 5.5vw;
+      --fs-hd: 4.8vw;
+    }
+    /* Font size presets */
+    body.font-kecil { --fs-xs:2vw; --fs-sm:2.5vw; --fs-nm:3vw; --fs-lg:3.5vw; --fs-xl:4.2vw; --fs-hd:3.8vw; }
+    body.font-normal { --fs-xs:2.5vw; --fs-sm:3.2vw; --fs-nm:3.8vw; --fs-lg:4.5vw; --fs-xl:5.5vw; --fs-hd:4.8vw; }
+    body.font-besar { --fs-xs:3vw; --fs-sm:4vw; --fs-nm:4.8vw; --fs-lg:5.5vw; --fs-xl:6.5vw; --fs-hd:5.8vw; }
+    /* Dark mode */
+        /* DARK MODE - perbaikan total */
+    body.dark-mode { background:#0f1117; color:#e8e8f0; }
+    body.dark-mode #app { background:#0f1117; }
+    body.dark-mode .header-app { background:linear-gradient(135deg,#1a237e,#3949ab); }
+    body.dark-mode .card-custom { background:#1c1c2e; color:#e8e8f0; }
+    body.dark-mode .pengumuman-item { background:#1c1c2e; }
+    body.dark-mode .laporan-item { background:#1c1c2e; }
+    body.dark-mode .card-custom b,
+    body.dark-mode .card-custom div,
+    body.dark-mode .card-custom span { color:#e8e8f0; }
+    body.dark-mode .nav-bottom { background:#1c1c2e; border-top:1px solid #2a2a40; }
+    body.dark-mode .nav-btn { color:#5566a0; }
+    body.dark-mode .nav-btn.active { color:#7986cb; }
+    body.dark-mode .page-header { background:#1c1c2e; border-bottom:1px solid #2a2a40; }
+    body.dark-mode .page-header h6 { color:#7986cb; }
+    body.dark-mode .page-top-title { background:#1c1c2e; color:#c5cbe9; border-bottom:1px solid #2a2a40; }
+    body.dark-mode .bg-white { background:#1c1c2e; }
+    body.dark-mode .menu-icon { background:#252545; box-shadow:0 4px 12px rgba(0,0,0,0.5); }
+    body.dark-mode .menu-text { color:#8890bb; }
+    body.dark-mode .menu-label { color:#5566a0; }
+    body.dark-mode .section-title { color:#c5cbe9; }
+    body.dark-mode .form-control { background:#252545; border-color:#3a3a60; color:#e8e8f0; }
+    body.dark-mode .form-control::placeholder { color:#5566a0; }
+    body.dark-mode .form-select { background:#252545; border-color:#3a3a60; color:#e8e8f0; }
+    body.dark-mode .btn-close-page { background:#252545; color:#c5cbe9; border:1px solid #3a3a60; }
+    body.dark-mode .btn-edit-sm { background:#1e3a5f; color:#64b5f6; }
+    body.dark-mode .btn-del-sm { background:#3e1c1c; color:#ef9a9a; }
+    body.dark-mode .ronda-table td { background:#1c1c2e; color:#e8e8f0; }
+    body.dark-mode .ronda-table th { background:#1a237e; color:#fff; }
+    body.dark-mode .chat-bubble-wrap.other .chat-bubble { background:#1c1c2e; color:#e8e8f0; }
+    body.dark-mode .chat-sender { color:#7986cb; }
+    body.dark-mode .chat-input-area { background:#1c1c2e; border-top:1px solid #2a2a40; }
+    body.dark-mode .chat-input { background:#252545; border-color:#3a3a60; color:#e8e8f0; }
+    body.dark-mode .text-masuk { color:#69f0ae; }
+    body.dark-mode .text-keluar { color:#ff6e6e; }
+    body.dark-mode .badge-kosong { background:#1b3a2a; color:#69f0ae; }
+    body.dark-mode .badge-isi { background:#3a1a4a; color:#ce93d8; }
+    body.dark-mode .badge-status.status-proses { background:#3a2800; color:#ffcc80; }
+    body.dark-mode .badge-status.status-selesai { background:#1b3a2a; color:#69f0ae; }
+    body.dark-mode .badge-status.status-ditolak { background:#3e1c1c; color:#ef9a9a; }
+    body.dark-mode .p-nama { color:#c5cbe9; }
+    body.dark-mode .p-tgl { color:#7780a0; }
+    body.dark-mode .p-isi { color:#f0f0ff; }
+    body.dark-mode .item-info { color:#e8e8f0; }
+    body.dark-mode .bg-light { background:#252545; }
+    body.dark-mode hr { border-color:#3a3a60; }
+    body.dark-mode .settings-panel { background:#1c1c2e; }
+    body.dark-mode .font-btn { background:#252545; color:#c5cbe9; }
+    body.dark-mode .theme-toggle { border-color:#3a3a60; }
+    body.dark-mode .theme-btn { background:#252545; color:#8890bb; }
+    body.dark-mode .sos-popup { background:#fff; color:#333; }
+    body.dark-mode .kas-header { background:linear-gradient(135deg,#1a237e,#283593); }
+    body.dark-mode .edit-mode-label { background:#e65100; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin:0; padding:0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      padding-bottom: 20vw;
+      color: #333;
+      font-size: var(--fs-nm);
+    }
+
+    /* ===== LOGIN ===== */
+    #loginPage {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--primary) 0%, var(--primary2) 50%, var(--primary3) 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; position: fixed; width: 100%; top: 0; z-index: 9999;
+      padding: 4vw;
+    }
+    .login-box {
+      background: white; border-radius: 5vw;
+      padding: 5vw 6vw;
+      width: 82%; max-width: 600px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .login-logo { width: 15vw; height: 15vw; object-fit: contain; display: block; margin: 0 auto 2.5vw; }
+    .login-title { text-align: center; font-size: 5vw; font-weight: 700; color: var(--primary); margin-bottom: 0.5vw; }
+    .login-sub { text-align: center; font-size: 2.8vw; color: #888; margin-bottom: 3.5vw; }
+    .login-input {
+      border-radius: 2.5vw; padding: 3vw 3.5vw;
+      border: 0.4vw solid #e0e0e0;
+      font-size: 3.8vw; margin-bottom: 2.5vw; width: 100%;
+      outline: none; font-family: inherit;
+    }
+    .login-input:focus { border-color: var(--primary); }
+    .btn-login {
+      background: linear-gradient(135deg, var(--primary), var(--primary3));
+      color: white; border: none; border-radius: 2.5vw;
+      padding: 3.5vw; width: 100%; font-weight: 700; font-size: 4vw;
+      cursor: pointer; font-family: inherit; letter-spacing: 0.5px;
+    }
+
+    /* ===== HEADER ===== */
+    .header-app {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: white; padding: 4vw 4vw 4vw;
+      border-radius: 0 0 6vw 6vw;
+      box-shadow: 0 6px 20px rgba(26,35,126,0.25);
+      overflow: hidden;
+    }
+    .header-top { display: flex; justify-content: space-between; align-items: center; }
+    .header-left { flex: 1; padding-right: 3vw; }
+    .app-keterangan { font-size: 2.8vw; opacity: 0.75; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5vw; }
+    .app-nama { font-size: 5.5vw; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; margin-bottom: 1.5vw; }
+    .user-nama { font-size: 4.8vw; font-weight: 700; line-height: 1.2; }
+    .user-peran { font-size: 3.2vw; opacity: 0.75; margin-top: 0.5vw; }
+    .header-logo {
+      width: 23vw; height: 23vw;
+      object-fit: contain; border-radius: 23vw;
+      background: rgba(255,255,255,0.15); padding: 1vw;
+      flex-shrink: 0;
+    }
+
+    /* ===== MENU ===== */
+    .menu-label { font-size: 3.5vw; font-weight: 600; color: #888; letter-spacing: 1px; text-transform: uppercase; padding: 4vw 4.5vw 2vw; }
+    .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vw; padding: 1vw 4vw 3vw; }
+    .menu-item { text-align: center; cursor: pointer; }
+    .menu-item:active .menu-icon { transform: scale(0.9); }
+    .menu-icon {
+      width: 15vw; height: 15vw; background: white;
+      border-radius: 4vw; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5vw; font-size: 6.5vw;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.15s;
+    }
+    .menu-text { font-size: var(--fs-xs); font-weight: 500; color: #555; line-height: 1.3; }
+
+    /* ===== CARD ===== */
+    .card-custom { background: white; border-radius: var(--radius); padding: 4vw; margin-bottom: 3vw; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+    /* ===== PAGES ===== */
+    .page { display: none; }
+    .page.active { display: block; animation: fadeIn 0.22s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: white; padding: 3.5vw 4.5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #f0f0f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .page-header h6 { margin: 0; font-weight: 700; font-size: var(--fs-lg); color: var(--primary); }
+    .btn-close-page {
+      background: #f0f2f8; border: none; border-radius: 2vw;
+      padding: 2vw 3.5vw; font-size: 3.2vw; font-weight: 600; color: #555; cursor: pointer; font-family: inherit;
+    }
+
+    /* ===== FORM ===== */
+    .form-control, .form-select {
+      border-radius: 3vw; border: 0.4vw solid #e8eaf0;
+      padding: 3.5vw 4vw; font-size: var(--fs-nm); margin-bottom: 3vw; width: 100%;
+      font-family: inherit; outline: none; display: block;
+    }
+    .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,35,126,0.08); }
+    textarea.form-control { resize: none; }
+
+    /* ===== BUTTONS ===== */
+    .btn { border-radius: 3vw; padding: 3.5vw 4vw; font-size: 3.8vw; font-family: inherit; border: none; cursor: pointer; font-weight: 600; display: inline-block; text-align: center; width: 100%; margin-top: 1vw; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:active { opacity: 0.85; }
+    .btn-success { background: #2e7d32; color: white; }
+    .btn-info { background: #0288d1; color: white; }
+    .btn-warning { background: #f57f17; color: white; }
+    .btn-secondary { background: #546e7a; color: white; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-outline-danger { background: transparent; color: var(--danger); border: 0.4vw solid var(--danger); }
+    .btn-sm { padding: 2.5vw 3.5vw; font-size: 3.5vw; }
+    .rounded-pill { border-radius: 10vw !important; }
+    .w-100 { width: 100%; }
+    .fw-bold { font-weight: 700; }
+
+    /* ===== BOTTOM NAV ===== */
+    .nav-bottom {
+      position: fixed; bottom: 0; width: 100%;
+      background: white; display: flex; justify-content: space-around;
+      padding: 3vw 0 4vw; border-top: 1px solid #eee; z-index: 1000;
+    }
+    .nav-btn { color: #bbb; text-align: center; flex: 1; border: none; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 1vw; }
+    .nav-btn i { font-size: 6.5vw; }
+    .nav-btn span { font-size: 2.5vw; font-weight: 500; }
+    .nav-btn.active { color: var(--primary); }
+
+    /* ===== EDIT/DELETE BUTTONS ===== */
+    .item-actions { display: flex; gap: 1.5vw; align-items: center; flex-shrink: 0; margin-left: 2vw; }
+    .btn-edit-sm { background: #e3f2fd; border: none; border-radius: 1.5vw; padding: 1.5vw 2vw; font-size: 3.5vw; cursor: pointer; color: #1565c0; }
+    .btn-del-sm { background: #ffebee; border: none; border-radius: 1.5vw; padding: 1.5vw 2vw; font-size: 3.5vw; cursor: pointer; color: var(--danger); }
+    .item-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 2vw; }
+    .item-info { flex: 1; min-width: 0; }
+
+    /* ===== PENGUMUMAN ===== */
+    .pengumuman-item {
+      background: white; border-radius: 3vw; padding: 4.5vw;
+      margin-bottom: 3vw; border-left: 1vw solid var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .p-nama { display: block; font-size: var(--fs-nm, 3vw); font-weight: 700; color: #444; }
+    .p-tgl { display: block; font-size: var(--fs-sm, 1.5vw); color: #999; margin: 0.8vw 0 1.5vw; }
+    .p-isi { font-size: var(--fs-lg, 3vw); font-weight: 300; color: #111; line-height: 1.5; }
+
+    /* ===== LAPORAN ===== */
+    .laporan-item {
+      background: white; border-radius: 3vw; padding: 4vw;
+      margin-bottom: 3vw; border-left: 1vw solid #ff9800;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .badge-status { display: inline-block; padding: 1.2vw 3vw; border-radius: 5vw; font-size: 3.2vw; font-weight: 600; margin-top: 1.5vw; }
+    .status-proses { background: #fff3e0; color: #e65100; }
+    .status-selesai { background: #e8f5e9; color: #2e7d32; }
+    .status-ditolak { background: #ffebee; color: #c62828; }
+    .btn-status { border: none; border-radius: 1.5vw; padding: 1.2vw 2.5vw; font-size: 2.8vw; cursor: pointer; font-weight: 600; margin-right: 1vw; margin-top: 1.5vw; font-family: inherit; display: inline-block; }
+
+    /* ===== KAS ===== */
+    .kas-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary3));
+      color: white; border-radius: 4vw; padding: 5vw;
+      margin: 3vw 4vw; text-align: center;
+      box-shadow: 0 6px 20px rgba(26,35,126,0.2);
+    }
+    .kas-header small { opacity: 0.8; font-size: 3.2vw; }
+    .kas-header h3 { margin: 1vw 0 0; font-weight: 700; font-size: 7vw; }
+    .text-masuk { color: #2e7d32; font-weight: 700; font-size: 4vw; }
+    .text-keluar { color: var(--danger); font-weight: 700; font-size: 4vw; }
+
+    /* ===== KONTRAKAN ===== */
+    .badge-kosong { background: #e8f5e9; color: #2e7d32; padding: 1.5vw 3.5vw; border-radius: 5vw; font-size: 3.5vw; font-weight: 600; }
+    .badge-isi { background: #f3e5f5; color: #6a1b9a; padding: 1.5vw 3.5vw; border-radius: 5vw; font-size: 3.5vw; font-weight: 600; }
+
+    /* ===== SOS ===== */
+    .sos-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 5000; align-items: center; justify-content: center; padding: 4vw; }
+    .sos-overlay.show { display: flex; }
+    .sos-popup {
+      background: white; border-radius: 5vw; padding: 5vw 5vw;
+      width: 100%; max-width: 600px; text-align: center;
+      max-height: 60vh; overflow-y: auto;
+    }
+    .sos-popup h5 { font-weight: 700; color: var(--danger); margin-bottom: 1vw; font-size: 4.5vw; }
+    .sos-popup p { font-size: 3vw; color: #666; margin-bottom: 2.5vw; line-height: 1.4; }
+    .sos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; }
+    .sos-btn {
+      border-radius: 3.5vw; padding: 4vw 2vw; border: none;
+      font-weight: 700; font-size: 3.5vw; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5vw;
+      font-family: inherit; width: 100%;
+    }
+    .sos-btn i { font-size: 7.5vw; }
+    .sos-btn-maling { background: #fff3e0; color: #e65100; }
+    .sos-btn-kebakaran { background: #ffebee; color: var(--danger); }
+    .sos-btn-medis { background: #e8f5e9; color: #2e7d32; }
+    .sos-btn-lainnya { background: #e3f2fd; color: #1565c0; }
+    .sos-btn-close {
+      background: #f5f5f5; color: #555; border: none; border-radius: 3vw;
+      padding: 3vw; width: 100%; margin-top: 3vw;
+      font-weight: 600; font-size: 3.8vw; cursor: pointer; font-family: inherit;
+    }
+    .sos-lainnya-form { display: none; margin-top: 3vw; }
+    .sos-lainnya-form textarea { border-radius: 3vw; border: 0.4vw solid #e0e0e0; padding: 3vw; width: 100%; font-size: 3.8vw; resize: none; font-family: inherit; }
+    .sos-lainnya-form button { margin-top: 2vw; background: #1565c0; color: white; border: none; border-radius: 3vw; padding: 4vw; width: 100%; font-weight: 600; font-size: 4vw; cursor: pointer; font-family: inherit; }
+    .main-sos-btn {
+      width: 45vw; height: 45vw; border-radius: 50%;
+      background: linear-gradient(135deg, var(--danger), #e53935);
+      color: white; border: none; font-size: 4vw; font-weight: 700;
+      cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 2vw;
+      box-shadow: 0 0 0 3vw rgba(198,40,40,0.15), 0 0 0 6vw rgba(198,40,40,0.07);
+      animation: pulse 2s infinite; margin: 0 auto; font-family: inherit;
+    }
+    .main-sos-btn i { font-size: 12vw; }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 3vw rgba(198,40,40,0.15), 0 0 0 6vw rgba(198,40,40,0.07); }
+      50% { box-shadow: 0 0 0 4vw rgba(198,40,40,0.2), 0 0 0 8vw rgba(198,40,40,0.05); }
+    }
+
+    /* ===== CHAT ===== */
+    .chat-wrap { display: flex; flex-direction: column; padding: 3vw 3vw 0; }
+    .chat-messages { overflow-y: auto; padding-bottom: 36vw; min-height: 50vh; }
+    .chat-bubble-wrap { display: flex; margin-bottom: 3vw; width: 100%; box-sizing: border-box; }
+    .chat-bubble-wrap.mine { justify-content: flex-end; align-items: flex-end; }
+    .chat-bubble-wrap.other { justify-content: flex-start; align-items: flex-start; }
+    .chat-bubble {
+      width: 100%; padding: 3vw 4vw; border-radius: 4vw;
+      font-size: var(--fs-lg); line-height: 1.5; word-break: break-word;
+    }
+    .chat-bubble-wrap.mine .chat-bubble { background: var(--primary); color: white; border-bottom-right-radius: 1vw; float: right; }
+    .chat-bubble-wrap.other .chat-bubble { background: white; color: #333; border-bottom-left-radius: 1vw; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    .chat-meta { font-size: 2.5vw; opacity: 0.55; margin-top: 1vw; display: block; }
+    .chat-sender { font-size: 3vw; font-weight: 700; margin-bottom: 1vw; color: var(--primary); }
+    .chat-input-area {
+      position: fixed; bottom: 19vw; left: 0; right: 0;
+      background: white; padding: 2.5vw 3vw;
+      border-top: 1px solid #eee; display: flex; gap: 2vw;
+      align-items: flex-end; z-index: 100;
+    }
+    .chat-input {
+      flex: 1; border: 0.4vw solid #e0e0e0; border-radius: 5vw;
+      padding: 3vw 4vw; font-size: 4vw; resize: none;
+      max-height: 25vw; font-family: inherit; outline: none; line-height: 1.4;
+    }
+    .chat-input:focus { border-color: var(--primary); }
+    .chat-send-btn {
+      background: var(--primary); color: white; border: none;
+      border-radius: 50%; width: 12vw; height: 12vw;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4vw; cursor: pointer; flex-shrink: 0;
+    }
+
+    /* ===== RONDA TABLE ===== */
+    .ronda-table { width: 100%; border-collapse: separate; border-spacing: 0 2vw; }
+    .ronda-table th { background: var(--primary); color: white; padding: 3vw 3vw; font-size: 3.5vw; }
+    .ronda-table th:first-child { border-radius: 3vw 0 0 3vw; }
+    .ronda-table th:last-child { border-radius: 0 3vw 3vw 0; }
+    .ronda-table td { background: white; padding: 3vw 3vw; font-size: 3.5vw; word-wrap: break-word; }
+    .ronda-table td:first-child { border-radius: 3vw 0 0 3vw; font-weight: 600; }
+    .ronda-table td:last-child { border-radius: 0 3vw 3vw 0; }
+
+    /* ===== MISC ===== */
+    .section-title { font-size: var(--fs-lg); font-weight: 700; color: #333; padding: 0 4vw; margin-bottom: 2.5vw; }
+    .empty-state { text-align: center; color: #ccc; padding: 8vw 4vw; font-size: 3.8vw; }
+    .px-3 { padding-left: 4vw !important; padding-right: 4vw !important; }
+    .p-3 { padding: 4vw !important; }
+    .pb-3 { padding-bottom: 4vw; }
+    .mb-2 { margin-bottom: 2vw; }
+    .mb-3 { margin-bottom: 3vw; }
+    .mt-1 { margin-top: 1vw; }
+    .mt-4 { margin-top: 5vw; }
+    .me-2 { margin-right: 1.5vw; }
+    .ms-2 { margin-left: 1.5vw; }
+    .d-flex { display: flex; }
+    .justify-content-between { justify-content: space-between; }
+    .align-items-center { align-items: center; }
+    .text-center { text-align: center; }
+    .text-muted { color: #888; }
+    .text-primary { color: var(--primary); }
+    .text-danger { color: var(--danger); }
+    .text-success { color: #2e7d32; }
+    .bg-light { background: #f8f9fa; }
+    .border-bottom { border-bottom: 1px solid #eee; }
+    .bg-white { background: white; }
+    small { font-size: 3vw; }
+    hr { border: none; border-top: 1px solid #eee; margin: 3vw 0; }
+
+    /* SETTINGS */
+    .settings-panel { background: white; border-radius: 4vw; padding: 5vw; margin: 4vw; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .settings-title { font-size: 4vw; font-weight: 700; color: #333; margin-bottom: 4vw; }
+    .settings-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4vw; }
+    .settings-label { font-size: 3.8vw; color: #555; }
+    .font-btns { display: flex; gap: 2vw; }
+    .font-btn { background: #f0f2f8; border: none; border-radius: 2vw; padding: 1.5vw 3vw; font-size: 3.5vw; cursor: pointer; font-weight: 600; font-family: inherit; }
+    .font-btn.active { background: var(--primary); color: white; }
+    .theme-toggle { display: flex; gap: 0; border-radius: 2vw; overflow: hidden; border: 0.4vw solid #e0e0e0; }
+    .theme-btn { background: #f8f9fa; border: none; padding: 2vw 4vw; font-size: 3.5vw; cursor: pointer; font-family: inherit; font-weight: 600; color: #888; }
+    .theme-btn.active { background: var(--primary); color: white; }
+    /* DARK MODE - perbaikan total */
+    body.dark-mode { background:#0f1117; color:#e8e8f0; }
+    body.dark-mode #app { background:#0f1117; }
+    body.dark-mode .header-app { background:linear-gradient(135deg,#1a237e,#3949ab); }
+    body.dark-mode .card-custom { background:#1c1c2e; color:#e8e8f0; }
+    body.dark-mode .pengumuman-item { background:#1c1c2e; }
+    body.dark-mode .laporan-item { background:#1c1c2e; }
+    body.dark-mode .card-custom b,
+    body.dark-mode .card-custom div,
+    body.dark-mode .card-custom span { color:#e8e8f0; }
+    body.dark-mode .nav-bottom { background:#1c1c2e; border-top:1px solid #2a2a40; }
+    body.dark-mode .nav-btn { color:#5566a0; }
+    body.dark-mode .nav-btn.active { color:#7986cb; }
+    body.dark-mode .page-header { background:#1c1c2e; border-bottom:1px solid #2a2a40; }
+    body.dark-mode .page-header h6 { color:#7986cb; }
+    body.dark-mode .page-top-title { background:#1c1c2e; color:#c5cbe9; border-bottom:1px solid #2a2a40; }
+    body.dark-mode .bg-white { background:#1c1c2e; }
+    body.dark-mode .menu-icon { background:#252545; box-shadow:0 4px 12px rgba(0,0,0,0.5); }
+    body.dark-mode .menu-text { color:#8890bb; }
+    body.dark-mode .menu-label { color:#5566a0; }
+    body.dark-mode .section-title { color:#c5cbe9; }
+    body.dark-mode .form-control { background:#252545; border-color:#3a3a60; color:#e8e8f0; }
+    body.dark-mode .form-control::placeholder { color:#5566a0; }
+    body.dark-mode .form-select { background:#252545; border-color:#3a3a60; color:#e8e8f0; }
+    body.dark-mode .btn-close-page { background:#252545; color:#c5cbe9; border:1px solid #3a3a60; }
+    body.dark-mode .btn-edit-sm { background:#1e3a5f; color:#64b5f6; }
+    body.dark-mode .btn-del-sm { background:#3e1c1c; color:#ef9a9a; }
+    body.dark-mode .ronda-table td { background:#1c1c2e; color:#e8e8f0; }
+    body.dark-mode .ronda-table th { background:#1a237e; color:#fff; }
+    body.dark-mode .chat-bubble-wrap.other .chat-bubble { background:#1c1c2e; color:#e8e8f0; }
+    body.dark-mode .chat-sender { color:#7986cb; }
+    body.dark-mode .chat-input-area { background:#1c1c2e; border-top:1px solid #2a2a40; }
+    body.dark-mode .chat-input { background:#252545; border-color:#3a3a60; color:#e8e8f0; }
+    body.dark-mode .text-masuk { color:#69f0ae; }
+    body.dark-mode .text-keluar { color:#ff6e6e; }
+    body.dark-mode .badge-kosong { background:#1b3a2a; color:#69f0ae; }
+    body.dark-mode .badge-isi { background:#3a1a4a; color:#ce93d8; }
+    body.dark-mode .badge-status.status-proses { background:#3a2800; color:#ffcc80; }
+    body.dark-mode .badge-status.status-selesai { background:#1b3a2a; color:#69f0ae; }
+    body.dark-mode .badge-status.status-ditolak { background:#3e1c1c; color:#ef9a9a; }
+    body.dark-mode .p-nama { color:#c5cbe9; }
+    body.dark-mode .p-tgl { color:#7780a0; }
+    body.dark-mode .p-isi { color:#f0f0ff; }
+    body.dark-mode .item-info { color:#e8e8f0; }
+    body.dark-mode .bg-light { background:#252545; }
+    body.dark-mode hr { border-color:#3a3a60; }
+    body.dark-mode .settings-panel { background:#1c1c2e; }
+    body.dark-mode .font-btn { background:#252545; color:#c5cbe9; }
+    body.dark-mode .theme-toggle { border-color:#3a3a60; }
+    body.dark-mode .theme-btn { background:#252545; color:#8890bb; }
+    body.dark-mode .sos-popup { background:#fff; color:#333; }
+    body.dark-mode .kas-header { background:linear-gradient(135deg,#1a237e,#283593); }
+    body.dark-mode .edit-mode-label { background:#e65100; }
+
+  /* Edit mode */
+    .edit-mode-label { background: #ff9800; color: white; font-size: 3vw; padding: 1vw 2.5vw; border-radius: 3vw; margin-bottom: 2vw; display: inline-block; }
+
+    /* noRumah badge */
+    #uNoRumah { font-size: 5vw; font-weight: 700; padding: 1.8vw 2.8vw; border-radius: 5vw; }
+
+    /* Page top title */
+    .page-top-title { font-size: var(--fs-lg); font-weight: 700; text-align: center; padding: 4vw; color: var(--primary); background: white; border-bottom: 1px solid #eee; }
+    .page-top-title.danger { color: var(--danger); }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage">
+  <div class="login-box">
+    <img src="https://i.ibb.co.com/jPxLvMfD/logort05.png" class="login-logo" onerror="this.style.display='none'">
+    <div class="login-title">RT 05 DIGITAL</div>
+    <div class="login-sub">Sistem Informasi Warga RT 05</div>
+    <input type="text" id="inputUser" class="login-input" placeholder="Username" autocomplete="off">
+    <input type="password" id="inputPass" class="login-input" placeholder="Password">
+    <button class="btn-login" onclick="prosesLogin()">MASUK</button>
+    <div id="loginError" style="color:#c62828;text-align:center;font-size:12px;margin-top:10px;display:none;"></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" style="display:none;">
+
+  <!-- HOME -->
+   <div id="homePage" class="page active">
+    <div class="header-app">
+      <div class="header-top">
+        <div class="header-left">
+          <div class="app-keterangan">Sistem Informasi</div>
+          <div class="app-nama">RT 05 DIGITAL</div>
+          <div class="user-nama" id="uNama">...</div>
+          <span id="uNoRumah" style="background:rgba(255,255,255,0.2);color:white;font-size:2.8vw;font-weight:600;padding:0.8vw 2.5vw;border-radius:20px;display:none;margin:1vw 0;"></span>
+          <div class="user-peran" id="uPeran">...</div>
+        </div>
+        <img src="https://i.ibb.co.com/jPxLvMfD/logort05.png" class="header-logo" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <div class="menu-label">Menu Utama</div>
+    <div class="menu-grid">
+      <div class="menu-item" onclick="buka('wargaPg')"><div class="menu-icon text-primary"><i class="bi bi-people-fill"></i></div><div class="menu-text">Warga</div></div>
+      <div class="menu-item" onclick="buka('kontrakanPg')"><div class="menu-icon text-info"><i class="bi bi-house-check-fill"></i></div><div class="menu-text">Kontrakan</div></div>
+      <div class="menu-item" onclick="buka('infoPg')"><div class="menu-icon text-warning"><i class="bi bi-info-circle-fill"></i></div><div class="menu-text">Info RT</div></div>
+      <div class="menu-item" onclick="buka('yatimPg')"><div class="menu-icon text-danger"><i class="bi bi-heart-fill"></i></div><div class="menu-text">Yatim</div></div>
+      <div class="menu-item" onclick="buka('tamuPg')"><div class="menu-icon text-success"><i class="bi bi-journal-bookmark-fill"></i></div><div class="menu-text">Buku Tamu</div></div>
+      <div class="menu-item" onclick="buka('uangPg')"><div class="menu-icon text-primary"><i class="bi bi-wallet2"></i></div><div class="menu-text">Uang Kematian</div></div>
+      <div class="menu-item" onclick="buka('umkmPg')"><div class="menu-icon text-success"><i class="bi bi-shop"></i></div><div class="menu-text">UMKM</div></div>
+      <div class="menu-item" onclick="buka('rondaPg')"><div class="menu-icon text-secondary"><i class="bi bi-moon-stars-fill"></i></div><div class="menu-text">Ronda</div></div>
+    </div>
+
+    <div class="px-3 pb-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="section-title" style="padding:0;font-size:4vw;font-weight:700;">PENGUMUMAN TERKINI</div>
+        <button id="btnTambahPengumuman" class="btn btn-sm btn-outline-primary rounded-pill" style="font-size:3.2vw;padding:1.5vw 3vw;display:none;white-space:nowrap;" onclick="toggleEl('formPengumuman')">+ Tulis</button>
+      </div>
+      <div id="formPengumuman" class="card-custom" style="display:none;">
+        <div id="editLabelPengumuman" class="edit-mode-label" style="display:none;">Mode Edit</div>
+        <textarea id="inputPengumuman" class="form-control" placeholder="Tulis pengumuman untuk warga..." style="height:150px;"></textarea>
+        <button onclick="simpanPengumuman()" class="btn btn-primary btn-sm w-100 rounded-pill mt-1">Kirim Pengumuman</button>
+        <button id="btnBatalEditPengumuman" onclick="batalEditPengumuman()" class="btn btn-sm btn-outline-secondary w-100 rounded-pill mt-1" style="display:none;">Batal Edit</button>
+      </div>
+      <div id="listPengumuman"><div class="empty-state">Belum ada pengumuman</div></div>
+    </div>
+  </div>
+
+  <!-- LAPOR PAGE -->
+  <div id="laporPg" class="page">
+    <div class="page-top-title">LAPORAN WARGA</div>
+    <div class="p-3">
+      <div class="card-custom mb-3">
+        <div class="fw-semibold mb-2" style="font-size:3.5vw;color:#555;">Laporkan Kendala Lingkungan</div>
+        <textarea id="inputLaporan" class="form-control" style="height:180px;" placeholder="Ceritakan kendala yang ada di lingkungan RT 05..."></textarea>
+        <button onclick="simpanLaporan()" class="btn btn-primary w-100 rounded-pill fw-bold mt-1">KIRIM LAPORAN</button>
+      </div>
+      <div class="section-title" style="font-size:3.5vw;font-weight:700;">RIWAYAT LAPORAN</div>
+      <div id="listLaporan"><div class="empty-state">Belum ada laporan</div></div>
+    </div>
+  </div>
+
+  <!-- SOS PAGE -->
+  <div id="sosPg" class="page">
+    <div class="page-top-title danger">DARURAT SOS</div>
+    <div class="p-4 text-center">
+      <div style="color:#888;font-size:3.8vw;margin-bottom:10vw;padding:0 4vw;text-align:center;">Tekan tombol darurat jika ada situasi berbahaya di lingkungan RT 05</div>
+      <button class="main-sos-btn" onclick="bukaSOSPopup()">
+        <i class="bi bi-exclamation-triangle-fill"></i>DARURAT
+      </button>
+      <div style="color:#ccc;font-size:3.2vw;margin-top:10vw;text-align:center;">Pesan akan dikirim ke WhatsApp pengurus RT 05</div>
+    </div>
+  </div>
+
+  <!-- CHAT PAGE -->
+  <div id="chatPg" class="page">
+    <div class="page-top-title">DISKUSI WARGA</div>
+    <div class="chat-wrap">
+      <div class="chat-messages" id="chatMessages"><div class="empty-state">Belum ada pesan</div></div>
+    </div>
+    <div class="chat-input-area">
+      <textarea id="inputChat" class="chat-input" placeholder="Tulis pesan..." rows="1" oninput="autoGrow(this)"></textarea>
+      <button class="chat-send-btn" onclick="kirimChat()"><i class="bi bi-send-fill"></i></button>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div id="aboutPg" class="page">
+    <div class="page-top-title">TENTANG APLIKASI</div>
+    <div class="p-4 text-center">
+      <img src="https://i.ibb.co.com/jPxLvMfD/logort05.png" style="width:18vw;height:18vw;object-fit:contain;margin-bottom:12px;" onerror="this.style.display='none'">
+      <p class="font-size:5vw;color:var(--primary);">RT 05 DIGITAL</p>
+      <p class="font-size:2.8vw;color:var(--primary);">Versi 1.0 Final</p>
+      <div class="card-custom bg-light text-center">
+        <p style="font-size:3.5vw;color:var(--primary);">Dibuat Oleh:</p>
+        <p style="font-weight:700;font-size:3.8vw;margin-top:1vw;color:var(--primary);">ERVAN AL-FIAN</p>
+        <hr><p style="font-size:3.5vw;color:var(--primary);margin-top:1vw;">RT 05 Digital adalah platform resmi warga untuk menciptakan lingkungan yang lebih modern, aman, dan transparan.</p>
+        <p style="font-weight:600;font-size:3.8vw;color:var(--primary);margin-top:1vw;">Fitur unggulan :</p>
+        <p style="font-size:3.5vw;color:var(--primary);margin-top:0.4vw;">📢 Laporan Warga: Sampaikan aspirasi dan keluhan dalam satu klik.</p>
+        <p style="font-size:3.5vw;color:var(--primary);margin-top:0.4vw;">🚨 Tombol SOS: Bantuan darurat cepat untuk situasi mendesak.</p>
+        <p style="font-size:3.5vw;color:var(--primary);margin-top:0.4vw;">💬 Forum Diskusi: Musyawarah warga kini lebih mudah.</p>
+        <hr><p style="font-weight:600;font-size:3.5vw;color:var(--primary);margin-top:0.4vw;">Bantuan & Dukungan:</p>
+        <p style="font-size:3.5vw;color:var(--primary);margin-top:0.4vw;">Jika ada kendala teknis atau saran pengembangan, silakan hubungi admin via WhatsApp: 085603635101</p>
+       <p style="font-size:3.5vw;color:var(--primary);margin-top:0.4vw;">Terima kasih telah berpartisipasi membangun lingkungan kita!</p>
+      </div>
+      <div id="panelPengaturan" class="card-custom mt-4" style="text-align:left;display:none;">
+        <div style="font-weight:700;font-size:4vw;margin-bottom:3vw;color:var(--primary);">⚙️ Pengaturan</div>
+        <div style="font-size:3.5vw;font-weight:600;margin-bottom:2vw;">Ukuran Huruf</div>
+        <div style="display:flex;gap:2vw;margin-bottom:4vw;">
+          <button onclick="ubahFont('kecil')" data-font="kecil" style="flex:1;padding:2.5vw;border-radius:3vw;border:0.4vw solid #ddd;background:#f5f5f5;font-size:3.2vw;cursor:pointer;">A- Kecil</button>
+          <button onclick="ubahFont('normal')" data-font="normal" style="flex:1;padding:2.5vw;border-radius:3vw;border:0.4vw solid var(--primary);background:var(--primary);color:white;font-size:3.5vw;cursor:pointer;font-weight:600;">A Normal</button>
+          <button onclick="ubahFont('besar')" data-font="besar" style="flex:1;padding:2.5vw;border-radius:3vw;border:0.4vw solid #ddd;background:#f5f5f5;font-size:3.8vw;cursor:pointer;">A+ Besar</button>
+        </div>
+        <div style="font-size:3.5vw;font-weight:600;margin-bottom:2vw;">Tema</div>
+        <div style="display:flex;gap:2vw;">
+          <button onclick="ubahTema('light')" data-tema="light" style="flex:1;padding:2.5vw;border-radius:3vw;border:0.4vw solid var(--primary);background:white;font-size:3.5vw;cursor:pointer;font-weight:600;">☀️ Terang</button>
+          <button onclick="ubahTema('dark')" data-tema="dark" style="flex:1;padding:2.5vw;border-radius:3vw;border:0.4vw solid #333;background:#1a1a2e;color:white;font-size:3.5vw;cursor:pointer;font-weight:600;">🌙 Gelap</button>
+        </div>
+      </div>
+      <button onclick="toggleEl('panelPengaturan')" class="btn btn-primary w-100 mt-4 rounded-pill" style="padding:3.5vw;font-size:4vw;">⚙️ Pengaturan</button>
+      <button onclick="logout()" class="btn btn-outline-danger w-100 mt-4 rounded-pill" style="padding:3.5vw;font-size:4vw;font-weight:700;">Keluar Akun</button>
+    </div>
+  </div>
+
+  <!-- WARGA PAGE -->
+  <div id="wargaPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-people-fill me-2"></i>DATA WARGA</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div id="formWarga" class="card-custom mb-3" style="display:none;">
+        <div id="editLabelWarga" class="edit-mode-label" style="display:none;">Mode Edit</div>
+        <input id="inputWargaNama" class="form-control" placeholder="Nama Lengkap">
+        <input id="inputWargaRumah" class="form-control" placeholder="No Rumah">
+        <input id="inputWargaHP" class="form-control" placeholder="No HP">
+        <select id="inputWargaStatus" class="form-select"><option>Milik Sendiri</option><option>Kontrakan</option></select>
+        <button onclick="simpanWarga()" class="btn btn-primary btn-sm w-100 rounded-pill">Simpan Data Warga</button>
+        <button id="btnBatalEditWarga" onclick="batalEdit('Warga')" class="btn btn-sm btn-outline-secondary w-100 rounded-pill mt-1" style="display:none;">Batal Edit</button>
+      </div>
+      <div id="listWarga"><div class="empty-state">Belum ada data warga</div></div>
+    </div>
+  </div>
+
+  <!-- KONTRAKAN PAGE -->
+  <div id="kontrakanPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-house-check-fill me-2"></i>KONTRAKAN</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div id="formKontrakan" class="card-custom mb-3" style="display:none;">
+        <input id="inputKontrakanNo" class="form-control" placeholder="No Rumah">
+        <select id="inputKontrakanStatus" class="form-select"><option>Kosong</option><option>Berpenghuni</option></select>
+        <button onclick="simpanKontrakan()" class="btn btn-info btn-sm w-100 rounded-pill text-white">Update Kontrakan</button>
+      </div>
+      <div id="listKontrakan"><div class="empty-state">Belum ada data kontrakan</div></div>
+    </div>
+  </div>
+
+  <!-- YATIM PAGE -->
+  <div id="yatimPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-heart-fill me-2 text-danger"></i>DATA YATIM</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div id="formYatim" class="card-custom mb-3" style="display:none;">
+        <div id="editLabelYatim" class="edit-mode-label" style="display:none;">Mode Edit</div>
+        <input id="inputYatimNama" class="form-control" placeholder="Nama">
+        <input id="inputYatimUmur" class="form-control" placeholder="Umur">
+        <input id="inputYatimRumah" class="form-control" placeholder="No Rumah">
+        <button onclick="simpanYatim()" class="btn btn-danger btn-sm w-100 rounded-pill">Simpan Data Yatim</button>
+        <button id="btnBatalEditYatim" onclick="batalEdit('Yatim')" class="btn btn-sm btn-outline-secondary w-100 rounded-pill mt-1" style="display:none;">Batal Edit</button>
+      </div>
+      <div id="listYatim"><div class="empty-state">Belum ada data yatim</div></div>
+    </div>
+  </div>
+
+  <!-- BUKU TAMU PAGE -->
+  <div id="tamuPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-journal-bookmark-fill me-2 text-success"></i>BUKU TAMU</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div class="card-custom mb-3" style="color:var(--primary);">
+        <div id="editLabelTamu" class="edit-mode-label" style="display:none;">Mode Edit</div>
+        <input id="inputTamuNama" class="form-control" placeholder="Nama Tamu">
+        <input id="inputTamuKeperluan" class="form-control" placeholder="Keperluan">
+        <button onclick="simpanTamu()" class="btn btn-success btn-sm w-100 rounded-pill fw-bold">LAPOR TAMU</button>
+        <button id="btnBatalEditTamu" onclick="batalEdit('Tamu')" class="btn btn-sm btn-outline-secondary w-100 rounded-pill mt-1" style="display:none;">Batal Edit</button>
+      </div>
+      <div class="section-title" style="font-size:3.5vw;font-weight:700;">Daftar Tamu</div>
+      <div id="listTamu"><div class="empty-state">Belum ada tamu terdaftar</div></div>
+    </div>
+  </div>
+
+  <!-- UANG KEMATIAN PAGE -->
+  <div id="uangPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-wallet2 me-2"></i>UANG KEMATIAN</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="kas-header"><small>Saldo Saat Ini</small><h3 id="saldo">Rp 0</h3></div>
+    <div class="p-3">
+      <div id="formKas" class="card-custom mb-3" style="display:none;">
+        <select id="inputKasJenis" class="form-select"><option value="Masuk">Masuk</option><option value="Keluar">Keluar</option></select>
+        <input id="inputKasNominal" type="number" class="form-control" placeholder="Nominal (Rp)">
+        <input id="inputKasKet" class="form-control" placeholder="Keterangan">
+        <button onclick="simpanKas()" class="btn btn-primary btn-sm w-100 rounded-pill">Simpan Transaksi</button>
+      </div>
+      <div class="section-title" style="font-size:3.5vw;font-weight:700;">Riwayat Transaksi</div>
+      <div id="listKas"><div class="empty-state">Belum ada transaksi</div></div>
+    </div>
+  </div>
+
+  <!-- UMKM PAGE -->
+  <div id="umkmPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-shop me-2 text-success"></i>UMKM RT 05</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div id="formUMKM" class="card-custom mb-3" style="display:none;">
+        <div id="editLabelUMKM" class="edit-mode-label" style="display:none;">Mode Edit</div>
+        <input id="inputUMKMNama" class="form-control" placeholder="Nama Warung/Usaha">
+        <input id="inputUMKMPemilik" class="form-control" placeholder="Pemilik">
+        <input id="inputUMKMRumah" class="form-control" placeholder="No Rumah">
+        <input id="inputUMKMKet" class="form-control" placeholder="Keterangan Usaha">
+        <button onclick="simpanUMKM()" class="btn btn-success btn-sm w-100 rounded-pill">Simpan Data UMKM</button>
+        <button id="btnBatalEditUMKM" onclick="batalEdit('UMKM')" class="btn btn-sm btn-outline-secondary w-100 rounded-pill mt-1" style="display:none;">Batal Edit</button>
+      </div>
+      <div id="listUMKM"><div class="empty-state">Belum ada data UMKM</div></div>
+    </div>
+  </div>
+
+  <!-- RONDA PAGE -->
+  <div id="rondaPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-moon-stars-fill me-2"></i>JADWAL RONDA</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div id="formEditRonda" class="card-custom mb-3" style="display:none;border-left:4px solid #546e7a;">
+        <div style="font-size:3.5vw;font-weight:700;color:#546e7a;margin-bottom:2vw;">✏️ Edit Jadwal: <span id="labelHariEdit" style="color:var(--primary);"></span></div>
+        <input id="inputEditPetugas" class="form-control" placeholder="Nama petugas ronda (pisah koma jika lebih dari 1)">
+        <div style="display:flex;gap:2vw;">
+          <button onclick="simpanEditRonda()" class="btn btn-secondary w-100 rounded-pill" style="font-size:3.5vw;">Simpan</button>
+          <button onclick="batalEditRonda()" class="btn w-100 rounded-pill" style="font-size:3.5vw;background:#f0f2f8;border:none;color:#555;">Batal</button>
+        </div>
+      </div>
+      <table class="ronda-table">
+        <thead><tr><th style="width:35%">Hari</th><th>Petugas Ronda</th><th id="rondaThAksi" style="width:16%;display:none;"></th></tr></thead>
+        <tbody id="listRonda"><tr><td colspan="3" class="text-center text-muted py-3" style="background:white;">Belum ada jadwal</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INFO RT PAGE -->
+  <div id="infoPg" class="page">
+    <div class="page-header"><h6><i class="bi bi-info-circle-fill me-2 text-warning"></i>INFO RT</h6><button class="btn-close-page" onclick="buka('homePage')">✕ Tutup</button></div>
+    <div class="p-3">
+      <div id="formInfo" class="card-custom mb-3" style="display:none;">
+        <input id="inputInfoJudul" class="form-control" placeholder="Judul Info">
+        <input type="file" id="inputInfoFile" class="form-control" accept="image/*">
+        <button onclick="simpanInfo()" class="btn btn-warning btn-sm w-100 rounded-pill mt-1 fw-bold">Upload Info</button>
+      </div>
+      <div id="listInfo"><div class="empty-state">Belum ada info RT</div></div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV (5 tombol) -->
+  <div class="nav-bottom">
+    <button class="nav-btn active" id="n1" onclick="buka('homePage','n1')"><i class="bi bi-house-door-fill"></i><span>Home</span></button>
+    <button class="nav-btn" id="n2" onclick="buka('laporPg','n2')"><i class="bi bi-megaphone-fill"></i><span>Lapor</span></button>
+    <button class="nav-btn" id="n3" onclick="buka('sosPg','n3')"><i class="bi bi-exclamation-triangle-fill" style="color:#c62828;"></i><span>SOS</span></button>
+    <button class="nav-btn" id="n4" onclick="bukaChat()"><i class="bi bi-chat-dots-fill"></i><span>Diskusi</span></button>
+    <button class="nav-btn" id="n5" onclick="buka('aboutPg','n5')"><i class="bi bi-person-bounding-box"></i><span>Tentang</span></button>
+  </div>
+</div>
+
+<!-- SOS POPUP -->
+<div class="sos-overlay" id="sosOverlay">
+  <div class="sos-popup">
+    <h5><i class="bi bi-exclamation-triangle-fill me-2"></i>SITUASI DARURAT</h5>
+    <p>Pilih jenis darurat. Pesan akan dikirim ke WhatsApp pengurus RT 05.</p>
+    <div class="sos-grid">
+      <button class="sos-btn sos-btn-maling" onclick="kirimSOS('maling')"><i class="bi bi-person-dash-fill"></i>MALING</button>
+      <button class="sos-btn sos-btn-kebakaran" onclick="kirimSOS('kebakaran')"><i class="bi bi-fire"></i>KEBAKARAN</button>
+      <button class="sos-btn sos-btn-medis" onclick="kirimSOS('medis')"><i class="bi bi-heart-pulse-fill"></i>BANTUAN MEDIS</button>
+      <button class="sos-btn sos-btn-lainnya" onclick="tampilLainnya()"><i class="bi bi-three-dots"></i>LAINNYA</button>
+    </div>
+    <div class="sos-lainnya-form" id="sosLainnyaForm">
+      <textarea id="sosLainnyaText" rows="3" placeholder="Jelaskan situasi darurat..."></textarea>
+      <button onclick="kirimSOS('lainnya')">Kirim Darurat</button>
+    </div>
+    <button class="sos-btn-close" onclick="tutupSOSPopup()">Batal / Tutup</button>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // STATE GLOBAL
+  // ============================================================
+  var user = null;
+  var isAdmin = false;
+  var NOMOR_WA_KETUA = "6283818440128"; // Ganti dengan nomor ketua RT
+
+  // State editing per modul
+  var editRow = { Warga:0, Yatim:0, UMKM:0, Tamu:0, Pengumuman:0, Kas:0, Info:0, Ronda:0 };
+
+  // ============================================================
+  // LOGIN & SESSION
+  // ============================================================
+  window.onload = function() {
+    var saved = localStorage.getItem('rt05_session');
+    if (saved) {
+      try { user = JSON.parse(saved); tampilApp(); }
+      catch(e) { localStorage.removeItem('rt05_session'); }
+    }
+  };
+
+  function prosesLogin() {
+    var u = document.getElementById('inputUser').value.trim();
+    var p = document.getElementById('inputPass').value.trim();
+    if (!u || !p) { tampilLoginError("Isi username dan password!"); return; }
+    document.getElementById('loginError').style.display = 'none';
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          user = res;
+          localStorage.setItem('rt05_session', JSON.stringify(res));
+          tampilApp();
+        } else { tampilLoginError("Username atau Password salah!"); }
+      })
+      .withFailureHandler(function() { tampilLoginError("Gagal terhubung. Coba lagi."); })
+      .checkLogin(u, p);
+  }
+
+  function tampilLoginError(msg) {
+    var el = document.getElementById('loginError');
+    el.innerText = msg; el.style.display = 'block';
+  }
+
+  function tampilApp() {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('uNama').innerText = user.nama;
+    document.getElementById('uPeran').innerText = user.peran;
+    if (user.noRumah && user.noRumah !== '' && user.noRumah !== '-') {
+      var badgeEl = document.getElementById('uNoRumah');
+      badgeEl.innerText = 'No Rumah. ' + user.noRumah;
+      badgeEl.style.display = 'inline-block';
+    }
+    isAdmin = user.peran && (user.peran.includes("Ketua") || user.peran.includes("Pengurus"));
+    var adminForms = ['formWarga','formKontrakan','formYatim','formKas','formUMKM','formInfo'];
+    adminForms.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = isAdmin ? 'block' : 'none';
+    });
+    if (isAdmin) {
+      document.getElementById('btnTambahPengumuman').style.display = 'block';
+      document.getElementById('formPengumuman').style.display = 'block';
+      document.getElementById('rondaThAksi').style.display = '';
+    }
+    refreshSemua();
+    terapkanPengaturan();
+  }
+
+  function logout() {
+    if (confirm("Yakin ingin keluar?")) { localStorage.removeItem('rt05_session'); location.reload(); }
+  }
+
+  // ============================================================
+  // REFRESH DATA
+  // ============================================================
+  function refreshSemua() {
+    refreshPengumuman(); refreshLaporan(); refreshTamu(); refreshKas();
+    refreshWarga(); refreshUMKM(); refreshYatim(); refreshKontrakan();
+    refreshRonda(); refreshInfo();
+  }
+
+  function escStr(s) { return (s||'').toString().replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+  function refreshPengumuman() {
+    google.script.run
+      .withSuccessHandler(function(d) {
+        var el = document.getElementById('listPengumuman');
+        if (!d || d.length === 0) {
+          el.innerHTML = '<div class="empty-state">Belum ada pengumuman</div>';
+          return;
+        }
+        var h = '';
+        var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+        items.reverse().forEach(function(item) {
+          var r = item.data; var rn = item.rowNum;
+          var tgl = r[0] ? r[0].toString() : '';
+          var isi = r[1] ? r[1].toString() : '';
+          var nama = r[2] ? r[2].toString() : '';
+          h += '<div class="pengumuman-item">'
+            + '<div class="item-row"><div class="item-info">'
+            + '<span class="p-nama">' + nama + '</span>'
+            + '<span class="p-tgl">' + tgl + '</span>'
+            + '<div class="p-isi">' + isi + '</div>'
+            + '</div>'
+            + (isAdmin ? '<div class="item-actions"><button class="btn-edit-sm" onclick="editPengumuman(' + rn + ',\'' + escStr(isi) + '\')">✏️</button><button class="btn-del-sm" onclick="hapusData(\'Pengumuman\',' + rn + ',refreshPengumuman)">🗑️</button></div>' : '')
+            + '</div></div>';
+        });
+        el.innerHTML = h;
+      })
+      .withFailureHandler(function(e){
+        document.getElementById('listPengumuman').innerHTML='<div style="color:red;padding:10px;font-size:12px;">Error: '+e.message+'</div>';
+      })
+      .fetchData('Pengumuman');
+  }
+
+  function refreshLaporan() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listLaporan');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada laporan</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        var st = (r[4]||'Proses').toString();
+        var stClass = st==='Selesai'?'status-selesai':(st==='Ditolak'?'status-ditolak':'status-proses');
+        h += '<div class="laporan-item"><b style="font-size:var(--fs-nm,3.8vw);color:#555;">' + (r[1]||'') + '</b> <small style="color:#999;font-size:3vw;">(' + (r[2]||'') + ')</small>'
+          + '<div style="font-size:2.8vw;color:#aaa;margin-top:0.5vw;">' + (r[0]||'') + '</div>'
+          + '<div style="font-size:3.2vw;margin-top:1vw;color:#333;line-height:1.5;">' + (r[3]||'') + '</div>'
+          + '<div style="margin-top:6px;"><span class="badge-status ' + stClass + '">' + st + '</span>';
+        if (isAdmin) {
+          h += '<br><button class="btn-status" style="background:#e8f5e9;color:#2e7d32;" onclick="ubahStatusLaporan(' + rn + ',\'Selesai\')">✅ Selesai</button>'
+            + '<button class="btn-status" style="background:#ffebee;color:#c62828;" onclick="ubahStatusLaporan(' + rn + ',\'Ditolak\')">❌ Tolak</button>'
+            + '<button class="btn-status" style="background:#fff3e0;color:#e65100;" onclick="ubahStatusLaporan(' + rn + ',\'Proses\')">🔄 Proses</button>'
+            + '<button class="btn-del-sm" onclick="hapusData(\'Laporan\',' + rn + ',refreshLaporan)" style="margin-top:4px;">🗑️ Hapus</button>';
+        }
+        h += '</div></div>';
+      });
+      el.innerHTML = h;
+    }).withFailureHandler(function(e){ document.getElementById('listLaporan').innerHTML='<div style="color:red;padding:10px;">Error: '+e.message+'</div>'; })
+    .fetchData('Laporan');
+  }
+
+  function refreshTamu() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listTamu');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada tamu</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        h += '<div class="card-custom" style="border-left:9px solid #4caf50;">'
+          + '<div class="item-row"><div class="item-info"><b style="font-size:3.5vw;">' + (r[2]||'') + '</b>'
+          + '<div style="font-size:2.8vw;color:#aaa;">' + (r[1]||'') + '</div>'
+          + '<div style="font-size:3.5vw;color:#555;">Keperluan: ' + (r[4]||'') + '</div>'
+          + '<div style="font-size:3vw;color:#aaa;">Pelapor: ' + (r[3]||'') + '</div></div>'
+          + ((isAdmin || (r[3]||'').toString() === user.nama) ? '<div class="item-actions"><button class="btn-edit-sm" onclick="editTamu(' + rn + ',\'' + escStr(r[2]) + '\',\'' + escStr(r[4]) + '\')">✏️</button><button class="btn-del-sm" onclick="hapusData(\'BukuTamu\',' + rn + ',refreshTamu)">🗑️</button></div>' : '')
+          + '</div></div>';
+      });
+      el.innerHTML = h;
+    }).fetchData('BukuTamu');
+  }
+
+  function refreshKas() {
+    google.script.run.withSuccessHandler(function(d) {
+      var h = ''; var saldo = 0;
+      if (!d || d.length === 0) { h = '<div class="empty-state">Belum ada transaksi</div>'; }
+      else {
+        saldo = d[d.length-1][3];
+        var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+        items.reverse().forEach(function(item) {
+          var r = item.data; var rn = item.rowNum;
+          var ismasuk = Number(r[1]) > 0;
+          h += '<div class="card-custom"><div class="item-row"><div class="item-info">'
+            + '<div style="font-size:3.5vw;font-weight:500;">' + (r[4]||'') + '</div>'
+            + '<div style="font-size:3.5vw;color:#aaa;margin-top:0.5vw;">' + (r[0]||'') + '</div></div>'
+            + '<div style="display:flex;align-items:center;gap:6px;">'
+            + '<b class="' + (ismasuk?'text-masuk':'text-keluar') + '">' + (ismasuk?'+':'-') + ' Rp ' + Number(ismasuk?r[1]:r[2]).toLocaleString('id') + '</b>'
+            + (isAdmin ? '<button class="btn-del-sm" onclick="hapusData(\'UangKematian\',' + rn + ',refreshKas)">🗑️</button>' : '')
+            + '</div></div></div>';
+        });
+      }
+      document.getElementById('listKas').innerHTML = h;
+      document.getElementById('saldo').innerText = 'Rp ' + Number(saldo).toLocaleString('id');
+    }).fetchData('UangKematian');
+  }
+
+  function refreshWarga() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listWarga');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada data warga</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        h += '<div class="card-custom"><div class="item-row"><div class="item-info">'
+          + '<b style="font-size:3.2vw;">' + (r[0]||'') + '</b>'
+          + '<div style="font-size:3.5vw;color:#888;margin-top:1vw;">No. ' + (r[1]||'') + ' | ' + (r[2]||'') + ' | ' + (r[3]||'') + '</div></div>'
+          + (isAdmin ? '<div class="item-actions"><button class="btn-edit-sm" onclick="editWarga(' + rn + ',\'' + escStr(r[0]) + '\',\'' + escStr(r[1]) + '\',\'' + escStr(r[2]) + '\',\'' + escStr(r[3]) + '\')">✏️</button><button class="btn-del-sm" onclick="hapusData(\'DataWarga\',' + rn + ',refreshWarga)">🗑️</button></div>' : '')
+          + '</div></div>';
+      });
+      el.innerHTML = h;
+    }).fetchData('DataWarga');
+  }
+
+  function refreshUMKM() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listUMKM');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada UMKM</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        h += '<div class="card-custom" style="border-left:4px solid #4caf50;"><div class="item-row"><div class="item-info">'
+          + '<b style="font-size:3.5vw;">' + (r[0]||'') + '</b>'
+          + '<div style="font-size:3vw;color:#777;margin-top:0.5vw;">Pemilik: ' + (r[1]||'') + ' (No. ' + (r[2]||'') + ')</div>'
+          + '<div style="font-size:3vw;color:#555;">Ket: ' + (r[3]||'') + '</div></div>'
+          + (isAdmin ? '<div class="item-actions"><button class="btn-edit-sm" onclick="editUMKM(' + rn + ',\'' + escStr(r[0]) + '\',\'' + escStr(r[1]) + '\',\'' + escStr(r[2]) + '\',\'' + escStr(r[3]) + '\')">✏️</button><button class="btn-del-sm" onclick="hapusData(\'UMKM\',' + rn + ',refreshUMKM)">🗑️</button></div>' : '')
+          + '</div></div>';
+      });
+      el.innerHTML = h;
+    }).fetchData('UMKM');
+  }
+
+  function refreshYatim() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listYatim');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada data yatim</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        h += '<div class="card-custom" style="border-left:4px solid #e53935;"><div class="item-row"><div class="item-info">'
+          + '<b style="font-size:3.2vw;">' + (r[0]||'') + '</b>'
+          + '<div style="font-size:3.5vw;color:#777;margin-top:0.5vw;">Umur: ' + (r[1]||'') + ' thn | No. Rumah: ' + (r[2]||'') + '</div></div>'
+          + (isAdmin ? '<div class="item-actions"><button class="btn-edit-sm" onclick="editYatim(' + rn + ',\'' + escStr(r[0]) + '\',\'' + escStr(r[1]) + '\',\'' + escStr(r[2]) + '\')">✏️</button><button class="btn-del-sm" onclick="hapusData(\'DataYatim\',' + rn + ',refreshYatim)">🗑️</button></div>' : '')
+          + '</div></div>';
+      });
+      el.innerHTML = h;
+    }).fetchData('DataYatim');
+  }
+
+  function refreshKontrakan() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listKontrakan');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada data kontrakan</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        h += '<div class="card-custom"><div class="item-row"><div class="item-info" style="font-weight:600;">No. ' + (r[0]||'') + '</div>'
+          + '<div style="display:flex;align-items:center;gap:8px;">'
+          + '<span class="' + (r[1]==='Kosong'?'badge-kosong':'badge-isi') + '">' + (r[1]||'') + '</span>'
+          + (isAdmin ? '<button class="btn-del-sm" onclick="hapusData(\'Kontrakan\',' + rn + ',refreshKontrakan)">🗑️</button>' : '')
+          + '</div></div></div>';
+      });
+      el.innerHTML = h;
+    }).fetchData('Kontrakan');
+  }
+
+  function refreshRonda() {
+    google.script.run.withSuccessHandler(function(d) {
+      var h = '';
+      if (!d || d.length === 0) {
+        h = '<tr><td colspan="3" class="text-center text-muted py-3" style="background:white;">Belum ada jadwal</td></tr>';
+      } else {
+        d.forEach(function(r, i) {
+          var rn = i + 2;
+          var hari = (r[0]||'').toString();
+          var petugas = (r[1]||'').toString();
+          var aksiHtml = '';
+          if (isAdmin) {
+            aksiHtml = '<div style="display:flex;flex-direction:column;gap:1.5vw;">'
+              + '<button class="btn-edit-sm" onclick="bukaEditRonda(\'' + escStr(hari) + '\',\'' + escStr(petugas) + '\')">✏️</button>'
+              + '<button class="btn-del-sm" onclick="hapusData(\'JadwalRonda\',' + rn + ',refreshRonda)">🗑️</button>'
+              + '</div>';
+          }
+          h += '<tr>'
+            + '<td style="font-size:4vw;font-weight:600;">' + hari + '</td>'
+            + '<td style="font-size:4vw;">' + petugas + '</td>'
+            + '<td style="background:white;">' + aksiHtml + '</td>'
+            + '</tr>';
+        });
+      }
+      document.getElementById('listRonda').innerHTML = h;
+    }).fetchRonda();
+  }
+
+  function refreshInfo() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('listInfo');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada info RT</div>'; return; }
+      var h = '';
+      var items = d.map(function(r,i){ return {data:r, rowNum:i+2}; });
+      items.reverse().forEach(function(item) {
+        var r = item.data; var rn = item.rowNum;
+        h += '<div class="card-custom"><div class="item-row"><div class="item-info" style="font-weight:600;font-size:3.5vw;">' + (r[1]||'') + '</div>'
+          + (isAdmin ? '<div class="item-actions"><button class="btn-del-sm" onclick="hapusData(\'InfoRT\',' + rn + ',refreshInfo)">🗑️</button></div>' : '')
+          + '</div>';
+        if (r[2] && r[2].toString().startsWith('data:')) {
+          h += '<img src="' + r[2] + '" style="width:100%;border-radius:10px;margin-top:8px;" onerror="this.style.display=\'none\'">';
+        }
+        h += '<div style="font-size:3vw;color:#aaa;margin-top:2vw;">' + (r[0]||'') + '</div></div>';
+      });
+      el.innerHTML = h;
+    }).fetchData('InfoRT');
+  }
+
+  function refreshChat() {
+    google.script.run.withSuccessHandler(function(d) {
+      var el = document.getElementById('chatMessages');
+      if (!d || d.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada pesan. Mulai diskusi!</div>'; return; }
+      var h = '';
+      d.forEach(function(r) {
+        var mine = (r[1]||'').toString() === user.nama;
+        h += '<div class="chat-bubble-wrap ' + (mine?'mine':'other') + '">'
+          + '<div>';
+        if (!mine) h += '<div class="chat-sender">' + (r[1]||'') + (r[2]?' (No. '+r[2]+')':'') + '</div>';
+        h += '<div class="chat-bubble">' + (r[3]||'') + '<div class="chat-meta">' + (r[0]||'') + '</div></div>'
+          + '</div></div>';
+      });
+      el.innerHTML = h;
+      el.scrollTop = el.scrollHeight;
+    }).fetchData('Chat');
+  }
+
+  // ============================================================
+  // SIMPAN DATA
+  // ============================================================
+  function simpanPengumuman() {
+    var isi = document.getElementById('inputPengumuman').value.trim();
+    if (!isi) { alert("Tulis pengumuman dulu!"); return; }
+    var tgl = new Date().toLocaleString('id-ID');
+    if (editRow.Pengumuman > 0) {
+      google.script.run.withSuccessHandler(function() {
+        resetEditPengumuman(); refreshPengumuman();
+      }).updateData('Pengumuman', editRow.Pengumuman, [tgl, isi, user.nama]);
+    } else {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('inputPengumuman').value = '';
+        refreshPengumuman();
+      }).withFailureHandler(function(e){ alert("Gagal: "+e.message); })
+      .saveData('Pengumuman', [tgl, isi, user.nama]);
+    }
+  }
+
+  function simpanLaporan() {
+    var isi = document.getElementById('inputLaporan').value.trim();
+    if (!isi) { alert("Tulis laporan dulu!"); return; }
+    var tgl = new Date().toLocaleString('id-ID');
+    google.script.run
+      .withSuccessHandler(function() { document.getElementById('inputLaporan').value = ''; alert("Laporan terkirim!"); refreshLaporan(); })
+      .withFailureHandler(function(e){ alert("Gagal: "+e.message); })
+      .saveData('Laporan', [tgl, user.nama, user.peran, isi, 'Proses']);
+  }
+
+  function simpanTamu() {
+    var nama = document.getElementById('inputTamuNama').value.trim();
+    var keperluan = document.getElementById('inputTamuKeperluan').value.trim();
+    if (!nama || !keperluan) { alert("Isi nama dan keperluan!"); return; }
+    var tgl = new Date().toLocaleString('id-ID');
+    if (editRow.Tamu > 0) {
+      google.script.run.withSuccessHandler(function() {
+        batalEdit('Tamu'); refreshTamu();
+      }).updateData('BukuTamu', editRow.Tamu, [tgl, tgl, nama, user.nama, keperluan]);
+    } else {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('inputTamuNama').value = '';
+        document.getElementById('inputTamuKeperluan').value = '';
+        alert("Tamu berhasil dicatat!"); refreshTamu();
+      }).saveData('BukuTamu', [tgl, tgl, nama, user.nama, keperluan]);
+    }
+  }
+
+  function simpanKas() {
+    var jenis = document.getElementById('inputKasJenis').value;
+    var nominal = document.getElementById('inputKasNominal').value;
+    var ket = document.getElementById('inputKasKet').value.trim();
+    if (!nominal || !ket) { alert("Isi nominal dan keterangan!"); return; }
+    google.script.run.withSuccessHandler(function() {
+      document.getElementById('inputKasNominal').value = '';
+      document.getElementById('inputKasKet').value = '';
+      alert("Kas tersimpan!"); refreshKas();
+    }).saveKas(jenis, nominal, ket);
+  }
+
+  function simpanWarga() {
+    var nama = document.getElementById('inputWargaNama').value.trim();
+    var rumah = document.getElementById('inputWargaRumah').value.trim();
+    var hp = document.getElementById('inputWargaHP').value.trim();
+    var status = document.getElementById('inputWargaStatus').value;
+    if (!nama || !rumah) { alert("Isi nama dan no rumah!"); return; }
+    if (editRow.Warga > 0) {
+      google.script.run.withSuccessHandler(function() {
+        batalEdit('Warga'); refreshWarga();
+      }).updateData('DataWarga', editRow.Warga, [nama, rumah, hp, status]);
+    } else {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('inputWargaNama').value = '';
+        document.getElementById('inputWargaRumah').value = '';
+        document.getElementById('inputWargaHP').value = '';
+        alert("Tersimpan!"); refreshWarga();
+      }).saveData('DataWarga', [nama, rumah, hp, status]);
+    }
+  }
+
+  function simpanKontrakan() {
+    var no = document.getElementById('inputKontrakanNo').value.trim();
+    var status = document.getElementById('inputKontrakanStatus').value;
+    if (!no) { alert("Isi no rumah!"); return; }
+    google.script.run.withSuccessHandler(function() {
+      document.getElementById('inputKontrakanNo').value = '';
+      alert("Terupdate!"); refreshKontrakan();
+    }).updateKontrakan(no, status);
+  }
+
+  function simpanUMKM() {
+    var nama = document.getElementById('inputUMKMNama').value.trim();
+    var pemilik = document.getElementById('inputUMKMPemilik').value.trim();
+    var rumah = document.getElementById('inputUMKMRumah').value.trim();
+    var ket = document.getElementById('inputUMKMKet').value.trim();
+    if (!nama || !pemilik) { alert("Isi nama dan pemilik!"); return; }
+    if (editRow.UMKM > 0) {
+      google.script.run.withSuccessHandler(function() {
+        batalEdit('UMKM'); refreshUMKM();
+      }).updateData('UMKM', editRow.UMKM, [nama, pemilik, rumah, ket]);
+    } else {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('inputUMKMNama').value = '';
+        document.getElementById('inputUMKMPemilik').value = '';
+        document.getElementById('inputUMKMRumah').value = '';
+        document.getElementById('inputUMKMKet').value = '';
+        alert("Tersimpan!"); refreshUMKM();
+      }).saveData('UMKM', [nama, pemilik, rumah, ket]);
+    }
+  }
+
+  function simpanYatim() {
+    var nama = document.getElementById('inputYatimNama').value.trim();
+    var umur = document.getElementById('inputYatimUmur').value.trim();
+    var rumah = document.getElementById('inputYatimRumah').value.trim();
+    if (!nama) { alert("Isi nama!"); return; }
+    if (editRow.Yatim > 0) {
+      google.script.run.withSuccessHandler(function() {
+        batalEdit('Yatim'); refreshYatim();
+      }).updateData('DataYatim', editRow.Yatim, [nama, umur, rumah]);
+    } else {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('inputYatimNama').value = '';
+        document.getElementById('inputYatimUmur').value = '';
+        document.getElementById('inputYatimRumah').value = '';
+        alert("Tersimpan!"); refreshYatim();
+      }).saveData('DataYatim', [nama, umur, rumah]);
+    }
+  }
+
+  var _editHariRonda = '';
+
+  function bukaEditRonda(hari, petugas) {
+    _editHariRonda = hari;
+    document.getElementById('labelHariEdit').innerText = hari;
+    document.getElementById('inputEditPetugas').value = petugas;
+    document.getElementById('formEditRonda').style.display = 'block';
+    document.getElementById('formEditRonda').scrollIntoView({behavior:'smooth'});
+  }
+
+  function batalEditRonda() {
+    _editHariRonda = '';
+    document.getElementById('formEditRonda').style.display = 'none';
+    document.getElementById('inputEditPetugas').value = '';
+  }
+
+  function simpanEditRonda() {
+    var petugas = document.getElementById('inputEditPetugas').value.trim();
+    if (!petugas) { alert("Isi nama petugas!"); return; }
+    google.script.run
+      .withSuccessHandler(function() { batalEditRonda(); refreshRonda(); })
+      .withFailureHandler(function(e) { alert("Gagal: " + e.message); })
+      .updateRondaByHari(_editHariRonda, petugas);
+  }
+
+  function simpanRonda() { /* tidak digunakan */ }
+
+  function simpanInfo() {
+    var judul = document.getElementById('inputInfoJudul').value.trim();
+    var fileInput = document.getElementById('inputInfoFile');
+    if (!judul) { alert("Isi judul!"); return; }
+    if (!fileInput.files || fileInput.files.length === 0) { alert("Pilih gambar!"); return; }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('inputInfoJudul').value = '';
+        fileInput.value = '';
+        alert("Berhasil diupload!"); refreshInfo();
+      }).saveInfoRT(judul, e.target.result);
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  }
+
+  // ============================================================
+  // EDIT FUNGSI PER MODUL
+  // ============================================================
+  function editWarga(rn, nama, rumah, hp, status) {
+    editRow.Warga = rn;
+    document.getElementById('inputWargaNama').value = nama;
+    document.getElementById('inputWargaRumah').value = rumah;
+    document.getElementById('inputWargaHP').value = hp;
+    document.getElementById('inputWargaStatus').value = status;
+    document.getElementById('editLabelWarga').style.display = 'inline-block';
+    document.getElementById('btnBatalEditWarga').style.display = 'block';
+    document.getElementById('formWarga').scrollIntoView({behavior:'smooth'});
+  }
+  function editYatim(rn, nama, umur, rumah) {
+    editRow.Yatim = rn;
+    document.getElementById('inputYatimNama').value = nama;
+    document.getElementById('inputYatimUmur').value = umur;
+    document.getElementById('inputYatimRumah').value = rumah;
+    document.getElementById('editLabelYatim').style.display = 'inline-block';
+    document.getElementById('btnBatalEditYatim').style.display = 'block';
+    document.getElementById('formYatim').scrollIntoView({behavior:'smooth'});
+  }
+  function editUMKM(rn, nama, pemilik, rumah, ket) {
+    editRow.UMKM = rn;
+    document.getElementById('inputUMKMNama').value = nama;
+    document.getElementById('inputUMKMPemilik').value = pemilik;
+    document.getElementById('inputUMKMRumah').value = rumah;
+    document.getElementById('inputUMKMKet').value = ket;
+    document.getElementById('editLabelUMKM').style.display = 'inline-block';
+    document.getElementById('btnBatalEditUMKM').style.display = 'block';
+    document.getElementById('formUMKM').scrollIntoView({behavior:'smooth'});
+  }
+  function editTamu(rn, nama, keperluan) {
+    editRow.Tamu = rn;
+    document.getElementById('inputTamuNama').value = nama;
+    document.getElementById('inputTamuKeperluan').value = keperluan;
+    document.getElementById('editLabelTamu').style.display = 'inline-block';
+    document.getElementById('btnBatalEditTamu').style.display = 'block';
+    document.getElementById('formTamu') && document.getElementById('formTamu').scrollIntoView({behavior:'smooth'});
+  }
+  function editPengumuman(rn, isi) {
+    editRow.Pengumuman = rn;
+    document.getElementById('inputPengumuman').value = isi;
+    document.getElementById('editLabelPengumuman').style.display = 'inline-block';
+    document.getElementById('btnBatalEditPengumuman').style.display = 'block';
+    document.getElementById('formPengumuman').style.display = 'block';
+    document.getElementById('formPengumuman').scrollIntoView({behavior:'smooth'});
+  }
+
+
+
+  function batalEdit(modul) {
+    editRow[modul] = 0;
+    var label = document.getElementById('editLabel' + modul);
+    var btn = document.getElementById('btnBatalEdit' + modul);
+    if (label) label.style.display = 'none';
+    if (btn) btn.style.display = 'none';
+    // Kosongkan form
+    var fieldMap = {
+      Warga: ['inputWargaNama','inputWargaRumah','inputWargaHP'],
+      Yatim: ['inputYatimNama','inputYatimUmur','inputYatimRumah'],
+      UMKM: ['inputUMKMNama','inputUMKMPemilik','inputUMKMRumah','inputUMKMKet'],
+      Tamu: ['inputTamuNama','inputTamuKeperluan']
+    };
+    if (fieldMap[modul]) fieldMap[modul].forEach(function(id){ document.getElementById(id).value=''; });
+  }
+
+  function batalEditPengumuman() {
+    editRow.Pengumuman = 0;
+    document.getElementById('inputPengumuman').value = '';
+    document.getElementById('editLabelPengumuman').style.display = 'none';
+    document.getElementById('btnBatalEditPengumuman').style.display = 'none';
+  }
+  function resetEditPengumuman() { batalEditPengumuman(); }
+
+  // ============================================================
+  // HAPUS DATA
+  // ============================================================
+  function hapusData(sheet, rowNum, callbackRefresh) {
+    if (!confirm("Yakin ingin menghapus data ini?")) return;
+    google.script.run.withSuccessHandler(function() {
+      callbackRefresh();
+    }).deleteData(sheet, rowNum);
+  }
+
+  // ============================================================
+  // UPDATE STATUS LAPORAN
+  // ============================================================
+  function ubahStatusLaporan(rowNum, status) {
+    google.script.run.withSuccessHandler(function() {
+      refreshLaporan();
+    }).updateStatusLaporan(rowNum, status);
+  }
+
+  // ============================================================
+  // SOS
+  // ============================================================
+  function bukaSOSPopup() {
+    document.getElementById('sosOverlay').classList.add('show');
+    document.getElementById('sosLainnyaForm').style.display = 'none';
+    document.getElementById('sosLainnyaText').value = '';
+  }
+  function tutupSOSPopup() { document.getElementById('sosOverlay').classList.remove('show'); }
+  function tampilLainnya() { var el=document.getElementById('sosLainnyaForm'); el.style.display=el.style.display==='none'?'block':'none'; }
+
+  function kirimSOS(jenis) {
+    var pesanMap = {
+      maling: '🚨 *DARURAT - ADA MALING!*',
+      kebakaran: '🔥 *DARURAT - KEBAKARAN!*',
+      medis: '🏥 *DARURAT - BUTUH BANTUAN MEDIS!*',
+      lainnya: '⚠️ *DARURAT - SITUASI LAINNYA!*'
+    };
+    var pesan = pesanMap[jenis] || '⚠️ *DARURAT!*';
+    if (jenis === 'lainnya') {
+      var detail = document.getElementById('sosLainnyaText').value.trim();
+      if (!detail) { alert("Jelaskan situasi daruratnya!"); return; }
+      pesan += '\n\nKeterangan: ' + detail;
+    }
+    var waktu = new Date().toLocaleString('id-ID');
+    var noRumah = user.noRumah && user.noRumah !== '-' ? 'Rumah No. ' + user.noRumah : 'Nomor rumah tidak terdaftar';
+    pesan += '\n\n👤 Pelapor: *' + user.nama + '* (' + user.peran + ')';
+    pesan += '\n🕐 Waktu: ' + waktu;
+    pesan += '\n📍 Lokasi: ' + noRumah + ', RT 05';
+    window.open('https://wa.me/' + NOMOR_WA_KETUA + '?text=' + encodeURIComponent(pesan), '_blank');
+    tutupSOSPopup();
+  }
+
+  // ============================================================
+  // CHAT
+  // ============================================================
+  function bukaChat() {
+    buka('chatPg','n4');
+    refreshChat();
+  }
+
+  function kirimChat() {
+    var pesan = document.getElementById('inputChat').value.trim();
+    if (!pesan) return;
+    var noRumah = user.noRumah || '-';
+    google.script.run.withSuccessHandler(function() {
+      document.getElementById('inputChat').value = '';
+      document.getElementById('inputChat').style.height = 'auto';
+      refreshChat();
+    }).saveChat(user.nama, noRumah, pesan);
+  }
+
+  function autoGrow(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+  }
+
+  // ============================================================
+  // NAVIGASI & UTILITAS
+  // ============================================================
+  // ============================================================
+  // PENGATURAN FONT & TEMA
+  // ============================================================
+  function ubahFont(ukuran) {
+    document.body.classList.remove('font-kecil','font-normal','font-besar');
+    document.body.classList.add('font-' + ukuran);
+    // Update button states
+    document.querySelectorAll('[data-font]').forEach(function(b) {
+      b.style.background = b.getAttribute('data-font') === ukuran ? 'var(--primary)' : '#f5f5f5';
+      b.style.color = b.getAttribute('data-font') === ukuran ? 'white' : '#333';
+      b.style.borderColor = b.getAttribute('data-font') === ukuran ? 'var(--primary)' : '#ddd';
+    });
+    localStorage.setItem('rt05_font', ukuran);
+  }
+
+  function ubahTema(tema) {
+    if (tema === 'dark') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    // Update theme button states
+    document.querySelectorAll('[data-tema]').forEach(function(b) {
+      b.style.background = b.getAttribute('data-tema') === tema ? 'var(--primary)' : (tema === 'dark' ? '#2a2a3e' : 'white');
+      b.style.color = b.getAttribute('data-tema') === tema ? 'white' : (tema === 'dark' ? '#aaa' : '#555');
+    });
+    localStorage.setItem('rt05_tema', tema);
+  }
+  function terapkanPengaturan() {
+    var font = localStorage.getItem('rt05_font') || 'normal';
+    var tema = localStorage.getItem('rt05_tema') || 'light';
+    ubahFont(font);
+    ubahTema(tema);
+  }
+
+  function buka(id, navId) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    if (navId) {
+      document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById(navId).classList.add('active');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function toggleEl(id) {
+    var el = document.getElementById(id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>
