@@ -1,0 +1,238 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+// ============================================================
+// AUTH & USER MANAGEMENT
+// ============================================================
+
+model User {
+  id          String   @id @default(cuid())
+  email       String?  @unique
+  name        String
+  password    String   // Will be hashed via Supabase Auth
+  role        Role     @default(WARGA)
+  houseNumber String?  @map("house_number")
+  phone       String?
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  announcements Announcement[]
+  reports       Report[]       @relation("Reporter")
+  adminResponses Report[]      @relation("AdminResponder")
+  sosLogs       SosLog[]
+  chatMessages  Chat[]
+  inviteCodesCreated InviteCode[] @relation("Creator")
+  inviteCodesUsed    InviteCode[] @relation("UsedBy")
+  tamuReports   Tamu[]
+
+  @@map("users")
+}
+
+enum Role {
+  KETUA
+  PENGURUS
+  WARGA
+}
+
+model InviteCode {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  createdBy String    @map("created_by")
+  creator   User      @relation("Creator", fields: [createdBy], references: [id])
+  usedBy    String?   @map("used_by")
+  usedByUser User?    @relation("UsedBy", fields: [usedBy], references: [id])
+  maxUses   Int       @default(1) @map("max_uses")
+  usedCount Int       @default(0) @map("used_count")
+  expiresAt DateTime  @map("expires_at")
+  isActive  Boolean   @default(true) @map("is_active")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("invite_codes")
+}
+
+// ============================================================
+// CORE FEATURES
+// ============================================================
+
+model Announcement {
+  id        String   @id @default(cuid())
+  content   String
+  authorId  String   @map("author_id")
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("announcements")
+}
+
+model Report {
+  id            String       @id @default(cuid())
+  content       String
+  reporterId    String       @map("reporter_id")
+  reporter      User         @relation("Reporter", fields: [reporterId], references: [id])
+  status        ReportStatus @default(PENDING)
+  adminResponse String?      @map("admin_response")
+  responderId   String?      @map("responder_id")
+  responder     User?        @relation("AdminResponder", fields: [responderId], references: [id])
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  @@map("reports")
+}
+
+enum ReportStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  REJECTED
+}
+
+model SosLog {
+  id        String      @id @default(cuid())
+  userId    String      @map("user_id")
+  user      User        @relation(fields: [userId], references: [id])
+  category  SosCategory
+  message   String?
+  status    SosStatus   @default(ACTIVE)
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  @@map("sos_logs")
+}
+
+enum SosCategory {
+  MALING
+  KEBAKARAN
+  MEDIS
+  LAINNYA
+}
+
+enum SosStatus {
+  ACTIVE
+  RESOLVED
+  FALSE_ALARM
+}
+
+model Chat {
+  id        String   @id @default(cuid())
+  senderId  String   @map("sender_id")
+  sender    User     @relation(fields: [senderId], references: [id])
+  message   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("chats")
+}
+
+// ============================================================
+// DATA MODULES
+// ============================================================
+
+model Resident {
+  id          String         @id @default(cuid())
+  name        String
+  houseNumber String         @map("house_number")
+  phone       String?
+  status      ResidentStatus @default(TETAP)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  @@map("residents")
+}
+
+enum ResidentStatus {
+  TETAP
+  KONTRAK
+  PINDAH
+}
+
+model Kas {
+  id          String   @id @default(cuid())
+  type        KasType
+  amount      Int
+  balance     Int      @default(0)
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("kas")
+}
+
+enum KasType {
+  MASUK
+  KELUAR
+}
+
+model Umkm {
+  id           String  @id @default(cuid())
+  businessName String  @map("business_name")
+  owner        String
+  houseNumber  String? @map("house_number")
+  description  String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("umkm")
+}
+
+model Yatim {
+  id          String  @id @default(cuid())
+  name        String
+  age         Int?
+  houseNumber String? @map("house_number")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("yatim")
+}
+
+model Kontrakan {
+  id          String          @id @default(cuid())
+  houseNumber String          @unique @map("house_number")
+  status      KontrakanStatus @default(KOSONG)
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+
+  @@map("kontrakan")
+}
+
+enum KontrakanStatus {
+  KOSONG
+  ISI
+}
+
+model Tamu {
+  id         String   @id @default(cuid())
+  guestName  String   @map("guest_name")
+  reporterId String   @map("reporter_id")
+  reporter   User     @relation(fields: [reporterId], references: [id])
+  purpose    String
+  visitDate  DateTime @default(now()) @map("visit_date")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("tamu")
+}
+
+model Ronda {
+  id       String @id @default(cuid())
+  day      String @unique
+  officers String
+
+  @@map("ronda")
+}
+
+model InfoRt {
+  id        String   @id @default(cuid())
+  title     String
+  imageUrl  String?  @map("image_url")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("info_rt")
+}

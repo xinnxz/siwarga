@@ -1,24 +1,35 @@
-# Stack Teknologi - RT 05 Digital
+# Tech Stack
 
-## Runtime & Environment
-- **Platform**: Google Apps Script (GAS)
-- **Deployment**: Google Web App
-- **Database**: Google Sheets (SpreadsheetApp)
+## Production
 
-## Frontend (Client-side)
-- **Struktur**: HTML5 (Semantic)
-- **Styling**: 
-  - CSS3 (Vanilla dengan CSS Variables)
-  - Bootstrap 5.3.0 (via CDN)
-  - Google Fonts: Poppins
-- **Iconography**: Bootstrap Icons 1.11.1
-- **Logika**: Vanilla JavaScript
-- **Pola UI**: Mobile-first Dashboard, Single Page Application (SPA) style.
+| Layer | Technology | Version | Purpose |
+|:------|:-----------|:--------|:--------|
+| Framework | Next.js (App Router) | 15.x | Fullstack — SSR, API routes, middleware |
+| Language | TypeScript | 5.x | Type safety, better DX |
+| Styling | Vanilla CSS (Design System) | - | Glassmorphism, dark mode, responsive |
+| ORM | Prisma | 6.x | Schema-as-code, migrations, type-safe queries |
+| Database | PostgreSQL (Supabase) | 15 | Relational, RLS, free 500MB |
+| Auth | Supabase Auth | - | JWT, bcrypt, OAuth-ready |
+| Realtime | Supabase Realtime | - | WebSocket (chat, SOS broadcast) |
+| Storage | Supabase Storage | - | File uploads, image CDN |
+| PWA | @serwist/next | - | Service worker, offline, installable |
+| Hosting | Vercel | - | Auto-deploy, CDN, serverless |
 
-## Backend (Server-side)
-- **Bahasa**: JavaScript (GAS Engine)
-- **Layanan GAS**:
-  - `HtmlService`: Untuk menyajikan antarmuka.
-  - `SpreadsheetApp`: Untuk manipulasi data di Sheets.
-  - `Session`: Untuk manajemen zona waktu.
-  - `Utilities`: Untuk pemformatan data.
+## Development
+
+| Tool | Purpose |
+|:-----|:--------|
+| ESLint | Code linting (Next.js preset) |
+| Prettier | Code formatting |
+| Prisma Studio | Database GUI browser |
+| Vercel CLI | Local dev, preview deploy |
+| Git + GitHub | Version control |
+| GSD | Project management workflow |
+
+## External Services (All Free Tier)
+
+| Service | Free Tier Limit | Usage |
+|:--------|:----------------|:------|
+| Supabase | 500MB DB, 1GB storage, 50K MAU | Database + Auth + Storage |
+| Vercel | 100GB bandwidth, serverless | Hosting + API |
+| GitHub | Unlimited repos | Version control |

@@ -1,15 +1,29 @@
-# Integrasi Eksternal - RT 05 Digital
+# Integrations
 
-## Google Workspace
-- **Google Sheets**: Sebagai database utama.
-- **Google Web App Engine**: Sebagai host aplikasi.
+## Supabase (Primary Backend)
 
-## CDN (Content Delivery Network)
-Aplikasi memuat library berikut dari CDN:
-- **Bootstrap 5.3.0**: Untuk framework UI.
-- **Bootstrap Icons 1.11.1**: Untuk simbol antarmuka.
-- **Google Fonts (Poppins)**: Untuk tipografi.
-- **ImgBB (ibb.co.com)**: Host untuk logo RT 05.
+| Service | Usage | Config |
+|:--------|:------|:-------|
+| PostgreSQL | All data storage | via Prisma ORM |
+| Auth | User authentication, JWT sessions | `@supabase/supabase-js` |
+| Realtime | Live chat, SOS broadcast | WebSocket subscriptions |
+| Storage | Image uploads (Info RT) | Bucket: `info-rt-images` |
 
-## WhatsApp Integration
-- Penggunaan skema URL `https://wa.me/` untuk fitur SOS dan bantuan teknis.
+**Connection**: Via `SUPABASE_URL` + `SUPABASE_ANON_KEY` (public) + `SUPABASE_SERVICE_ROLE_KEY` (server-side)
+
+## Vercel (Hosting)
+
+| Feature | Usage |
+|:--------|:------|
+| Edge Network | Static assets CDN |
+| Serverless Functions | Next.js API routes |
+| Auto-deploy | Push to `main` → deploy |
+| Preview | PR branches get preview URLs |
+
+## External CDN Dependencies
+
+| Resource | URL | Purpose |
+|:---------|:----|:--------|
+| Google Fonts | `fonts.googleapis.com` | Poppins font family |
+
+> **Note**: Bootstrap CSS dependency from v1.0 will be REMOVED. All styling via custom design system.
