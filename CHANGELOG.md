@@ -10,13 +10,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Project initialization and architecture documentation
-- System Architecture document (C4 diagrams, tech stack)
-- Database Design document (10 collection schemas)
-- Security Architecture document (RBAC, Firestore rules, threat model)
-- API & Service Layer document (repository pattern, service contracts)
-- Feature Specifications document (wireframes, acceptance criteria)
-- Project Structure document (clean architecture, coding standards)
+- Flutter app scaffold `siwarga_app/` (Riverpod, GoRouter, Firebase-ready)
+- Design tokens & Stitch prompt templates (`docs/design/`)
+- Sheet export helper `exportAllSheetsToJson()` in `kode.gs`
+- Migration map `docs/MIGRATION-MAP.md`
+
+### Changed
+- README: dokumentasi dual-stack v1 (GAS) vs v2 (Flutter/Firebase)
+
+---
+
+## [1.0.0] — GAS Production Release
+
+### Summary
+Production deployment **RT 05 Digital** sebagai Google Web App: spreadsheet-backed CRUD, login sheet `Akun`, fitur pengumuman, laporan, SOS (WhatsApp), chat, warga, kontrakan, yatim, buku tamu, uang kematian, UMKM, jadwal ronda, Info RT.
+
+### Details
+- Backend: [`kode.gs`](kode.gs)
+- Frontend: single-page [`index.html`](index.html) (Bootstrap 5, vanilla JS)
 
 ---
 

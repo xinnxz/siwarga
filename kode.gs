@@ -1,6 +1,12 @@
 // ============================================================
 // RT 05 DIGITAL - Kode.gs
 // ============================================================
+//
+// FREEZE / READONLY (setelah cutover Flutter): Setelah migrasi ke Firebase
+// selesai dan disetujui Ketua RT, nonaktifkan fungsi yang menulis ke sheet
+// (saveData, deleteData, updateData, saveKas, dll.) atau hentikan deployment
+// Web App ini agar sumber kebenaran tunggal ada di Firestore.
+//
 
 function doGet() {
   return HtmlService.createTemplateFromFile('index').evaluate()
@@ -191,4 +197,27 @@ function saveChat(nama, noRumah, pesan) {
   var tgl = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'dd/MM/yyyy HH:mm');
   s.appendRow([tgl, nama, noRumah, pesan]);
   return true;
+}
+
+// ============================================================
+// EXPORT SEMUA SHEET → JSON DI GOOGLE DRIVE (untuk migrasi Firestore)
+// Jalankan dari editor Apps Script: pilih fungsi exportAllSheetsToJson → Run
+// ============================================================
+function exportAllSheetsToJson() {
+  var sheets = [
+    'Akun', 'DataWarga', 'Pengumuman', 'Laporan', 'BukuTamu',
+    'UangKematian', 'UMKM', 'DataYatim', 'Kontrakan',
+    'JadwalRonda', 'InfoRT', 'Chat'
+  ];
+  var out = {};
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  sheets.forEach(function(name) {
+    var sh = ss.getSheetByName(name);
+    if (sh) {
+      out[name] = sh.getDataRange().getValues();
+    }
+  });
+  var stamp = new Date().getTime();
+  var fileName = 'siwarga_export_' + stamp + '.json';
+  DriveApp.createFile(fileName, JSON.stringify(out, null, 2), MimeType.PLAIN_TEXT);
 }

@@ -1,0 +1,42 @@
+name: siwarga_app
+description: SiWarga RT.05 — Flutter + Firebase (migrasi dari GAS + Sheets).
+publish_to: "none"
+version: 2.0.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  go_router: ^14.6.2
+
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.4
+  cloud_firestore: ^5.5.2
+  firebase_messaging: ^15.1.6
+  firebase_storage: ^12.3.7
+  cloud_functions: ^5.2.2
+
+  intl: ^0.19.0
+  image_picker: ^1.1.2
+  cached_network_image: ^3.4.1
+  google_fonts: ^6.2.1
+  uuid: ^4.5.1
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.6.3
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true

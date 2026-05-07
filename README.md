@@ -4,7 +4,19 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)](https://flutter.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-Backend-orange?logo=firebase)](https://firebase.google.com)
+[![Google Apps Script](https://img.shields.io/badge/GAS-Legacy%20v1.0-yellow)](https://developers.google.com/apps-script)
 [![License](https://img.shields.io/badge/License-Private-red)]()
+
+---
+
+## Status proyek
+
+| Versi | Stack | Lokasi | Status |
+|-------|--------|--------|--------|
+| **v1.0** | Google Apps Script + Google Sheets + Web App (`index.html`) | repo root: [`kode.gs`](kode.gs), [`index.html`](index.html) | **Production** — dipakai RT saat ini |
+| **v2.0** | Flutter + Firebase (Firestore, Auth, FCM, Storage) | [`siwarga_app/`](siwarga_app/) | **In progress** — migrasi sesuai `docs/architecture/` |
+
+**Roadmap migrasi:** ekspor data Sheets (`exportAllSheetsToJson` di `kode.gs`), pemetaan kolom → Firestore ([`docs/MIGRATION-MAP.md`](docs/MIGRATION-MAP.md)), lalu cutover setelah parity fitur diuji Ketua RT.
 
 ---
 
@@ -44,20 +56,23 @@ SiWarga adalah aplikasi mobile untuk meningkatkan keamanan, komunikasi, dan efis
 
 ## 🚀 Getting Started
 
+### A. Aplikasi produksi saat ini (v1 — Google Apps Script)
+
+Spreadsheet + Script: [`kode.gs`](kode.gs), UI [`index.html`](index.html). Deploy sebagai Web App dari editor Apps Script.
+
+Ekspor data untuk migrasi: jalankan fungsi `exportAllSheetsToJson()` di [`kode.gs`](kode.gs) (file JSON di Drive).
+
+### B. Aplikasi mobile baru (v2 — Flutter, dalam repo)
+
 ```bash
-# 1. Clone repository
-git clone https://github.com/[your-username]/siwarga.git
-cd siwarga/siwarga_app
-
-# 2. Install dependencies
+cd siwarga_app
+flutter create . --project-name siwarga_app   # jika folder platform belum ada
 flutter pub get
-
-# 3. Configure Firebase
-flutterfire configure --project=siwarga-rt05
-
-# 4. Run the app
+flutterfire configure --project=<firebase_project_id>
 flutter run
 ```
+
+Detail setup: [`siwarga_app/README.md`](siwarga_app/README.md).
 
 ---
 
