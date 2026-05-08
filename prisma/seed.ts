@@ -124,8 +124,8 @@ async function main() {
     await prisma.resident.create({
       data: {
         houseNumber: dummyHouse,
-        headOfFamily: "Bapak Warga Test",
-        memberCount: 3,
+        name: "Bapak Warga Test",
+        phone: "081234567891",
       }
     });
     console.log("✅ Berhasil membuat data Resident dummy.");
