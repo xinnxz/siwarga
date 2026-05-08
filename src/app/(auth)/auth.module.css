@@ -1,0 +1,297 @@
+/* ============================================================
+   AUTH PAGES — Login & Register
+   ============================================================ */
+
+.authPage {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-5);
+  background: linear-gradient(160deg, #312e81 0%, #4338ca 40%, #6366f1 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative blobs */
+.authPage::before {
+  content: "";
+  position: absolute;
+  top: -15%;
+  right: -20%;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.authPage::after {
+  content: "";
+  position: absolute;
+  bottom: -10%;
+  left: -15%;
+  width: 14rem;
+  height: 14rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── Brand Section ── */
+.brand {
+  text-align: center;
+  margin-bottom: var(--space-8);
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 500ms ease;
+}
+
+.brandLogo {
+  width: 4.5rem;
+  height: 4.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto var(--space-4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.brandName {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.brandTagline {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: var(--space-1);
+}
+
+/* ── Auth Card ── */
+.authCard {
+  width: 100%;
+  max-width: 26rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 500ms ease 100ms both;
+}
+
+.authTitle {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-1);
+}
+
+.authSubtitle {
+  font-size: var(--fs-sm);
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-6);
+}
+
+/* ── Form ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.formLabel {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-gray-700);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.inputWithIcon {
+  padding-left: 2.75rem !important;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--color-gray-400);
+  padding: var(--space-1);
+}
+
+.errorMsg {
+  font-size: var(--fs-xs);
+  color: var(--color-danger);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: var(--space-4);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--space-2);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+}
+
+.submitBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Divider ── */
+.authDivider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-2) 0;
+}
+
+.authDivider::before,
+.authDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-gray-200);
+}
+
+.authDividerText {
+  font-size: var(--fs-xs);
+  color: var(--color-gray-400);
+}
+
+/* ── Switch Link ── */
+.authSwitch {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-gray-500);
+  margin-top: var(--space-5);
+}
+
+.authSwitch a {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
+
+/* ── Register Steps ── */
+.steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.step {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  transition: all var(--transition-normal);
+  background: var(--color-gray-100);
+  color: var(--color-gray-400);
+}
+
+.step.active {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+.step.done {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.stepConnector {
+  flex: 1;
+  height: 2px;
+  background: var(--color-gray-200);
+  max-width: 2.5rem;
+  transition: background var(--transition-normal);
+}
+
+.stepConnector.done {
+  background: var(--color-success);
+}
+
+/* ── Invite Code input ── */
+.inviteInput {
+  text-align: center;
+  letter-spacing: 0.3em;
+  font-size: var(--fs-xl) !important;
+  font-weight: var(--fw-bold) !important;
+  text-transform: uppercase;
+}
+
+/* ── Info box ── */
+.infoBox {
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-xs);
+  color: var(--color-primary-700);
+  line-height: var(--lh-relaxed);
+}
+
+.infoBox strong {
+  font-weight: var(--fw-semibold);
+}
