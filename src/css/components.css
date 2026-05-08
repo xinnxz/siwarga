@@ -1,16 +1,13 @@
 /* ============================================================
-   COMPONENT STYLES — Glassmorphism Design System
+   COMPONENT STYLES — Solid Material Design
    ============================================================ */
 
-/* ── Glass Card ── */
+/* ── Solid Card ── */
 .card {
   background: var(--bg-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
   border-radius: var(--radius-xl);
   padding: var(--space-5);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--shadow-sm);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
@@ -80,9 +77,8 @@ textarea.input { resize: vertical; min-height: 5rem; }
 .bottom-nav {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 100%; max-width: var(--max-width);
-  background: var(--bg-card); backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-top: var(--glass-border);
+  background: var(--bg-card);
+  border-top: 1px solid var(--color-gray-200);
   display: flex; justify-content: space-around;
   padding: var(--space-2) 0 calc(var(--space-2) + env(safe-area-inset-bottom));
   z-index: var(--z-nav);
@@ -109,6 +105,7 @@ textarea.input { resize: vertical; min-height: 5rem; }
   color: #fff; padding: var(--space-6) var(--space-5) var(--space-8);
   border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   position: relative; overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 .header::before {
   content: ""; position: absolute; top: -50%; right: -20%;
@@ -121,23 +118,24 @@ textarea.input { resize: vertical; min-height: 5rem; }
   background: rgba(255,255,255,0.05); border-radius: 50%;
 }
 .header__top { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
-.header__greeting { font-size: var(--fs-sm); opacity: 0.8; }
-.header__name { font-size: var(--fs-2xl); font-weight: var(--fw-bold); margin-top: var(--space-1); }
-.header__role { font-size: var(--fs-xs); opacity: 0.7; margin-top: var(--space-1); }
+.header__greeting { font-size: var(--fs-xs); opacity: 0.75; text-transform: uppercase; letter-spacing: 1px; }
+.header__name { font-size: var(--fs-xl); font-weight: var(--fw-bold); margin-top: var(--space-1); letter-spacing: 0.5px; }
+.header__role { font-size: var(--fs-xs); opacity: 0.75; margin-top: var(--space-1); }
 .header__avatar {
   width: 3.5rem; height: 3.5rem;
-  background: rgba(255,255,255,0.2); border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.15); border-radius: var(--radius-full);
   display: flex; align-items: center; justify-content: center;
-  font-size: var(--fs-xl); backdrop-filter: blur(10px);
+  font-size: var(--fs-xl);
 }
 
 /* ── Page Header ── */
 .page-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--space-4) var(--space-5);
-  background: var(--bg-card); backdrop-filter: var(--glass-blur);
+  background: var(--bg-card);
   border-bottom: 1px solid var(--color-gray-200);
   position: sticky; top: 0; z-index: var(--z-sticky);
+  box-shadow: var(--shadow-sm);
 }
 .page-header__title { font-size: var(--fs-lg); font-weight: var(--fw-bold); color: var(--color-primary); }
 
@@ -150,8 +148,8 @@ textarea.input { resize: vertical; min-height: 5rem; }
 .menu-item:active { transform: scale(0.93); }
 .menu-item__icon {
   width: 3.5rem; height: 3.5rem;
-  background: var(--bg-card); backdrop-filter: var(--glass-blur);
-  border: var(--glass-border); border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.5rem; box-shadow: var(--shadow-sm);
   transition: box-shadow var(--transition-fast), transform var(--transition-fast);

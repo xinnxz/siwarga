@@ -6,24 +6,14 @@ export const metadata: Metadata = {
 };
 
 const menuItems = [
-  { icon: "📢", label: "Pengumuman", href: "/pengumuman" },
-  { icon: "🚨", label: "SOS Darurat", href: "/sos" },
-  { icon: "💬", label: "Diskusi", href: "/chat" },
-  { icon: "📝", label: "Laporan", href: "/laporan" },
-  { icon: "💰", label: "Kas RT", href: "/kas" },
-  { icon: "👨‍👩‍👧", label: "Data Warga", href: "/warga" },
-  { icon: "🏠", label: "Kontrakan", href: "/kontrakan" },
-  { icon: "🛍️", label: "UMKM", href: "/umkm" },
-  { icon: "📋", label: "Buku Tamu", href: "/tamu" },
-  { icon: "🌙", label: "Ronda", href: "/ronda" },
-  { icon: "📌", label: "Info RT", href: "/info-rt" },
-  { icon: "⚙️", label: "Pengaturan", href: "/settings" },
-];
-
-const stats = [
-  { label: "Total Warga", value: "48 KK", icon: "👨‍👩‍👧", color: "var(--color-primary)" },
-  { label: "Laporan Aktif", value: "3", icon: "📝", color: "var(--color-warning)" },
-  { label: "SOS Bulan Ini", value: "0", icon: "🚨", color: "var(--color-danger)" },
+  { iconClass: "bi bi-people-fill", colorClass: styles.textPrimary, label: "Warga", href: "/warga" },
+  { iconClass: "bi bi-house-check-fill", colorClass: styles.textInfo, label: "Kontrakan", href: "/kontrakan" },
+  { iconClass: "bi bi-info-circle-fill", colorClass: styles.textWarning, label: "Info RT", href: "/info-rt" },
+  { iconClass: "bi bi-heart-fill", colorClass: styles.textDanger, label: "Yatim", href: "/yatim" },
+  { iconClass: "bi bi-journal-bookmark-fill", colorClass: styles.textSuccess, label: "Buku Tamu", href: "/tamu" },
+  { iconClass: "bi bi-wallet2", colorClass: styles.textPrimary, label: "Uang Kematian", href: "/uang" },
+  { iconClass: "bi bi-shop", colorClass: styles.textSuccess, label: "UMKM", href: "/umkm" },
+  { iconClass: "bi bi-moon-stars-fill", colorClass: styles.textSecondary, label: "Ronda", href: "/ronda" },
 ];
 
 export default function DashboardPage() {
@@ -33,47 +23,28 @@ export default function DashboardPage() {
       <header className="header">
         <div className="header__top">
           <div>
-            <p className="header__greeting">Selamat datang di</p>
-            <h1 className="header__name">SiWarga RT 05</h1>
-            <p className="header__role">Sinar Giri Harja 🏡</p>
+            <div className="header__greeting">Sistem Informasi</div>
+            <div className="header__name">RT 05 DIGITAL</div>
+            <div className="header__greeting" style={{ marginTop: '0.5rem', textTransform: 'none' }}>Bapak Luthfi</div>
+            <div className="header__role" style={{ marginTop: '0.2rem' }}>Warga</div>
           </div>
-          <div className="header__avatar">👤</div>
+          <div className="header__avatar" style={{ background: 'transparent' }}>
+             <i className="bi bi-person-circle" style={{fontSize: '3rem', opacity: 0.9}}></i>
+          </div>
         </div>
       </header>
 
-      <main>
-        {/* Stats */}
-        <section className={styles.statsSection}>
-          <div className={styles.statsGrid}>
-            {stats.map((stat) => (
-              <div key={stat.label} className={`card card--solid ${styles.statCard}`}>
-                <span className={styles.statIcon}>{stat.icon}</span>
-                <span className={styles.statValue} style={{ color: stat.color }}>
-                  {stat.value}
-                </span>
-                <span className={styles.statLabel}>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SOS Button */}
-        <section className={styles.sosSection}>
-          <button className={styles.sosButton} aria-label="Tombol SOS Darurat">
-            <span className={styles.sosIcon}>🚨</span>
-            <span className={styles.sosText}>SOS DARURAT</span>
-            <span className={styles.sosSubtext}>Tekan untuk lapor darurat</span>
-          </button>
-        </section>
-
-        {/* Quick Actions */}
+      <main style={{ paddingBottom: '5rem' }}>
+        {/* Main Menu */}
         <section>
-          <p className="section-label">Menu Utama</p>
+          <div className={styles.menuLabel}>Menu Utama</div>
           <div className="menu-grid">
             {menuItems.map((item) => (
-              <a key={item.label} href={item.href} className="menu-item">
-                <div className="menu-item__icon">{item.icon}</div>
-                <span className="menu-item__label">{item.label}</span>
+              <a key={item.label} href={item.href} className="menu-item" style={{textDecoration: 'none'}}>
+                <div className="menu-item__icon">
+                  <i className={`${item.iconClass} ${item.colorClass}`}></i>
+                </div>
+                <span className="menu-item__label" style={{fontSize: '0.7rem', color: '#555', fontWeight: 500, textAlign: 'center'}}>{item.label}</span>
               </a>
             ))}
           </div>
@@ -81,53 +52,53 @@ export default function DashboardPage() {
 
         {/* Pengumuman Terbaru */}
         <section className={styles.announcementsSection}>
-          <p className="section-label">Pengumuman Terbaru</p>
-          <div className="content-area" style={{ paddingTop: 0 }}>
-            <div className={`card card--accent-left animate-fade-in-up`}>
-              <div className={styles.announcementItem}>
-                <div>
-                  <p className={styles.announcementTitle}>Kerja Bakti RT 05</p>
-                  <p className={styles.announcementDate}>Sabtu, 10 Mei 2026 · 07.00 WIB</p>
-                  <p className={styles.announcementBody}>
-                    Seluruh warga diharap hadir untuk kerja bakti membersihkan selokan dan taman
-                    lingkungan RT 05.
-                  </p>
-                </div>
-                <span className="badge badge--primary">Baru</span>
+           <div className={styles.sectionTitleContainer}>
+              <h2 className={styles.sectionTitle}>PENGUMUMAN TERKINI</h2>
+           </div>
+           
+           <div className={styles.announcementItem}>
+              <div style={{flex: 1}}>
+                <span className={styles.announcementTitle}>Kerja Bakti RT 05</span>
+                <span className={styles.announcementDate}>Sabtu, 10 Mei 2026 · 07.00 WIB</span>
+                <span className={styles.announcementBody}>
+                  Seluruh warga diharap hadir untuk kerja bakti membersihkan selokan dan taman lingkungan RT 05.
+                </span>
               </div>
-            </div>
-            <div className={`card card--accent-left animate-fade-in-up`} style={{ animationDelay: "50ms" }}>
-              <div className={styles.announcementItem}>
-                <div>
-                  <p className={styles.announcementTitle}>Iuran Bulanan Mei 2026</p>
-                  <p className={styles.announcementDate}>Senin, 5 Mei 2026</p>
-                  <p className={styles.announcementBody}>
-                    Iuran bulanan Mei sudah dapat dibayarkan ke Bendahara RT.
-                  </p>
-                </div>
+           </div>
+
+           <div className={styles.announcementItem}>
+              <div style={{flex: 1}}>
+                <span className={styles.announcementTitle}>Iuran Bulanan Mei 2026</span>
+                <span className={styles.announcementDate}>Senin, 5 Mei 2026</span>
+                <span className={styles.announcementBody}>
+                  Iuran bulanan Mei sudah dapat dibayarkan ke Bendahara RT.
+                </span>
               </div>
-            </div>
-          </div>
+           </div>
         </section>
       </main>
 
       {/* Bottom Navigation */}
       <nav className="bottom-nav">
         <button className="nav-item active">
-          <span className="nav-item__icon">🏠</span>
-          <span>Beranda</span>
+          <i className="bi bi-house-door-fill" style={{fontSize: '1.2rem', marginBottom: '4px'}}></i>
+          <span style={{fontSize: '0.65rem', fontWeight: 500}}>Home</span>
         </button>
         <button className="nav-item">
-          <span className="nav-item__icon">💬</span>
-          <span>Diskusi</span>
+          <i className="bi bi-megaphone-fill" style={{fontSize: '1.2rem', marginBottom: '4px'}}></i>
+          <span style={{fontSize: '0.65rem', fontWeight: 500}}>Lapor</span>
         </button>
         <button className="nav-item">
-          <span className="nav-item__icon">📝</span>
-          <span>Laporan</span>
+          <i className="bi bi-exclamation-triangle-fill" style={{fontSize: '1.2rem', marginBottom: '4px', color: '#c62828'}}></i>
+          <span style={{fontSize: '0.65rem', fontWeight: 500, color: '#c62828'}}>SOS</span>
         </button>
         <button className="nav-item">
-          <span className="nav-item__icon">👤</span>
-          <span>Profil</span>
+          <i className="bi bi-chat-dots-fill" style={{fontSize: '1.2rem', marginBottom: '4px'}}></i>
+          <span style={{fontSize: '0.65rem', fontWeight: 500}}>Diskusi</span>
+        </button>
+        <button className="nav-item">
+          <i className="bi bi-person-bounding-box" style={{fontSize: '1.2rem', marginBottom: '4px'}}></i>
+          <span style={{fontSize: '0.65rem', fontWeight: 500}}>Tentang</span>
         </button>
       </nav>
     </div>
