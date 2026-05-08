@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({
+    const res = NextResponse.json({
       data: {
         session: data.session,
         user: {
@@ -75,6 +75,16 @@ export async function POST(request: Request) {
         },
       },
     });
+
+    // Set auth cookie for proxy.ts
+    res.cookies.set("supabase-auth-token", data.session.access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: data.session.expires_in,
+    });
+
+    return res;
   } catch (err) {
     console.error("[LOGIN ERROR]", err);
     return NextResponse.json(
