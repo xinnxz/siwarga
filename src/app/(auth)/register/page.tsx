@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "../auth.module.css";
 
 type Step = 1 | 2 | 3;
@@ -29,6 +30,7 @@ const INITIAL: FormData = {
 const STEP_LABELS = ["Kode Undangan", "Data Diri", "Akun"];
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [step, setStep] = useState<Step>(1);
   const [form, setForm] = useState<FormData>(INITIAL);
   const [showPassword, setShowPassword] = useState(false);
@@ -41,8 +43,8 @@ export default function RegisterPage() {
   }
 
   async function handleStep1() {
-    if (form.inviteCode.length < 6) {
-      setError("Kode undangan tidak valid. Minta ke pengurus RT.");
+    if (form.inviteCode.length !== 5) {
+      setError("Kode undangan harus terdiri dari 5 karakter.");
       return;
     }
     setLoading(true);
@@ -78,10 +80,26 @@ export default function RegisterPage() {
       return;
     }
     setLoading(true);
-    // TODO: create account via Supabase Auth
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    setError("Fitur ini sedang diintegrasikan dengan Supabase Auth.");
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) {
+        setError(data.error || "Gagal mendaftar. Coba lagi.");
+        return;
+      }
+
+      // Sukses
+      router.push("/login?registered=true");
+    } catch (err) {
+      setError("Terjadi kesalahan sistem.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -155,10 +173,10 @@ export default function RegisterPage() {
                   id="inviteCode"
                   type="text"
                   className={`input ${styles.inviteInput}`}
-                  placeholder="RT05XX"
+                  placeholder="RT05X"
                   value={form.inviteCode}
                   onChange={(e) => update("inviteCode", e.target.value.toUpperCase())}
-                  maxLength={8}
+                  maxLength={5}
                   autoCapitalize="characters"
                   autoComplete="off"
                 />

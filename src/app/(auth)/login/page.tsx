@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "../auth.module.css";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -19,10 +21,26 @@ export default function LoginPage() {
     }
     setError("");
     setLoading(true);
-    // TODO Phase 3 Plan 03-01: Supabase Auth integration
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    setError("Fitur login sedang diintegrasikan dengan Supabase Auth.");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Gagal masuk. Coba lagi.");
+        return;
+      }
+
+      // Sukses, pindah ke dashboard
+      router.push("/dashboard");
+    } catch (err) {
+      setError("Terjadi kesalahan sistem.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

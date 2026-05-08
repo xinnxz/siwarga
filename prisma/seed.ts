@@ -33,10 +33,10 @@ async function main() {
   // 1. Buat user di Supabase Auth
   console.log("Memeriksa User Supabase...");
   let authUser;
-  
+
   // Cari apakah user sudah ada
   const { data: existingUsers, error: listError } = await supabaseAdmin.auth.admin.listUsers();
-  
+
   if (listError) {
     console.error("Gagal mendapatkan list user Supabase:", listError);
     process.exit(1);
@@ -59,7 +59,7 @@ async function main() {
       console.error("Gagal membuat user Supabase:", createError);
       process.exit(1);
     }
-    
+
     authUser = newUser.user;
     console.log("✅ Berhasil membuat User Supabase Auth.");
   }
@@ -91,14 +91,15 @@ async function main() {
 
   // 3. Buat Kode Undangan Baru
   console.log("Membuat Kode Undangan (Invite Code)...");
-  
+
   // Hapus kode undangan lama jika ada untuk admin ini
   await prisma.inviteCode.deleteMany({
     where: { createdBy: authUser.id }
   });
 
-  const inviteCode = "RT05-WARGA-BARU";
-  
+  // Generate random 5 chars code or use fixed
+  const inviteCode = "RT05X";
+
   await prisma.inviteCode.create({
     data: {
       code: inviteCode,
@@ -110,6 +111,27 @@ async function main() {
   });
 
   console.log("✅ Berhasil membuat Kode Undangan.");
+
+  // 4. Buat data warga dummy (Resident) untuk verifikasi nomor rumah
+  console.log("Memeriksa data Resident dummy...");
+  const dummyHouse = "B2";
+  const existingResident = await prisma.resident.findFirst({
+    where: { houseNumber: dummyHouse }
+  });
+
+  if (!existingResident) {
+    console.log("⏳ Membuat data Resident dummy...");
+    await prisma.resident.create({
+      data: {
+        houseNumber: dummyHouse,
+        headOfFamily: "Bapak Warga Test",
+        memberCount: 3,
+      }
+    });
+    console.log("✅ Berhasil membuat data Resident dummy.");
+  } else {
+    console.log("✅ Data Resident dummy sudah ada.");
+  }
 
   console.log("\n=============================================");
   console.log("🎉 SEEDING SELESAI!");
